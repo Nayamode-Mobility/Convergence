@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="c5u-1C-CZm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="c5u-1C-CZm">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -1057,6 +1057,12 @@
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.40784313725490196" green="0.12941176470588234" blue="0.47843137254901957" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10231" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="I0V-N3-alb">
+                                                <rect key="frame" x="207" y="51" width="42" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="size" keyPath="contentSize">
@@ -2524,6 +2530,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="fdA-I6-bPN"/>
                     <connections>
+                        <outlet property="newlyaddedLabel" destination="I0V-N3-alb" id="D7J-iU-yo4"/>
                         <outlet property="svwMain" destination="ZaD-iP-3uf" id="wAy-5p-oNC"/>
                     </connections>
                 </viewController>
@@ -2969,7 +2976,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="OVb-nk-vjK">
-                                                <rect key="frame" x="0.0" y="96" width="320" height="468"/>
+                                                <rect key="frame" x="0.0" y="96.000000097812745" width="320" height="468"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" red="0.89019614459999996" green="0.89019614459999996" blue="0.89019614459999996" alpha="1" colorSpace="deviceRGB"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tZx-T9-Cs7">
@@ -9408,11 +9415,11 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="cGS-P0-8oI">
-                                <rect key="frame" x="0.0" y="122" width="320" height="444.0000000569197"/>
+                                <rect key="frame" x="0.0" y="122" width="320" height="444.00000011378415"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="guh-5U-9wL">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="445.0000000569197"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="445.00000011378415"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -9518,7 +9525,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="P39-kQ-MGa">
-                                                <rect key="frame" x="0.0" y="122" width="320" height="444.00000005691982"/>
+                                                <rect key="frame" x="0.0" y="122" width="320" height="444.00000011378432"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eih-YR-G1n">
@@ -9529,7 +9536,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view hidden="YES" contentMode="scaleToFill" id="H0u-qo-WCL">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="444.00000005691982"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="444.00000011378432"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="address.png" id="0SS-au-SMw">
@@ -14117,7 +14124,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="dy8-yK-kkI">
-                                <rect key="frame" x="0.0" y="122" width="320" height="444"/>
+                                <rect key="frame" x="0.0" y="122.00000005691973" width="320" height="444"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="From:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0qW-Sg-SRF">
@@ -15218,50 +15225,207 @@
     </scenes>
     <resources>
         <image name="Address_108x108.png" width="108" height="108"/>
+        <image name="Address_108x108.png" width="108" height="108"/>
+        <image name="Address_108x108.png" width="108" height="108"/>
         <image name="CityGuide_new.png" width="800" height="499"/>
+        <image name="Default.png" width="320" height="480"/>
         <image name="Default.png" width="320" height="480"/>
         <image name="Delete_108x108.png" width="108" height="108"/>
         <image name="Email1_108x108.png" width="108" height="108"/>
         <image name="Email_108x108.png" width="108" height="108"/>
+        <image name="Email_108x108.png" width="108" height="108"/>
         <image name="FAQ152X152.png" width="152" height="152"/>
         <image name="FB152X152.png" width="152" height="152"/>
         <image name="HubBG.png" width="320" height="568"/>
+        <image name="HubBG.png" width="320" height="568"/>
+        <image name="HubBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
+        <image name="InnerPgBG.png" width="320" height="568"/>
         <image name="InnerPgBG.png" width="320" height="568"/>
         <image name="Map_108x108.png" width="108" height="108"/>
         <image name="MobileTower_108x108.png" width="108" height="108"/>
         <image name="Phone_108x108.png" width="108" height="108"/>
+        <image name="Phone_108x108.png" width="108" height="108"/>
+        <image name="Phone_108x108.png" width="108" height="108"/>
+        <image name="Phone_108x108.png" width="108" height="108"/>
+        <image name="Refresh24.png" width="24" height="24"/>
+        <image name="Refresh24.png" width="24" height="24"/>
+        <image name="Refresh24.png" width="24" height="24"/>
+        <image name="Refresh24.png" width="24" height="24"/>
         <image name="Refresh24.png" width="24" height="24"/>
         <image name="Save_108x108.png" width="108" height="108"/>
         <image name="ScheduleBuilder_img.png" width="432" height="155"/>
         <image name="Search24.png" width="24" height="24"/>
+        <image name="Search24.png" width="24" height="24"/>
+        <image name="Search24.png" width="24" height="24"/>
+        <image name="Search24.png" width="24" height="24"/>
+        <image name="Search24.png" width="24" height="24"/>
+        <image name="Search24.png" width="24" height="24"/>
+        <image name="Search24.png" width="24" height="24"/>
+        <image name="Search24.png" width="24" height="24"/>
+        <image name="Website_108x108.png" width="108" height="108"/>
+        <image name="Website_108x108.png" width="108" height="108"/>
         <image name="Website_108x108.png" width="108" height="108"/>
         <image name="add_icon.png" width="65" height="90"/>
+        <image name="add_icon.png" width="65" height="90"/>
+        <image name="add_icon.png" width="65" height="90"/>
+        <image name="address.png" width="74" height="74"/>
         <image name="address.png" width="74" height="74"/>
         <image name="agenda152X152.png" width="152" height="152"/>
         <image name="announcement152X152.png" width="152" height="152"/>
         <image name="announcement_detail_image_new.png" width="556" height="399"/>
         <image name="attendees152X152.png" width="152" height="152"/>
         <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
+        <image name="back.png" width="48" height="48"/>
         <image name="bg1small.jpg" width="432" height="100"/>
         <image name="checkbox_unchecked.png" width="40" height="40"/>
+        <image name="checkbox_unchecked.png" width="40" height="40"/>
+        <image name="checkbox_unchecked.png" width="40" height="40"/>
+        <image name="checkbox_unchecked.png" width="40" height="40"/>
+        <image name="checkbox_unchecked.png" width="40" height="40"/>
+        <image name="checkbox_unchecked.png" width="40" height="40"/>
+        <image name="cityGuide152X152.png" width="152" height="152"/>
         <image name="cityGuide152X152.png" width="152" height="152"/>
         <image name="company.png" width="168" height="168"/>
+        <image name="company.png" width="168" height="168"/>
+        <image name="company.png" width="168" height="168"/>
+        <image name="company.png" width="168" height="168"/>
+        <image name="company.png" width="168" height="168"/>
         <image name="crookedhouse_new.png" width="438" height="233"/>
+        <image name="detail_icon.png" width="65" height="92"/>
+        <image name="detail_icon.png" width="65" height="92"/>
+        <image name="detail_icon.png" width="65" height="92"/>
         <image name="detail_icon.png" width="65" height="92"/>
         <image name="email.png" width="89" height="87"/>
         <image name="emergency152X152.png" width="152" height="152"/>
         <image name="evaluations152X152.png" width="152" height="152"/>
         <image name="excel_icon.png" width="36" height="37"/>
+        <image name="excel_icon.png" width="36" height="37"/>
+        <image name="excel_icon.png" width="36" height="37"/>
         <image name="exhibitors152X152.png" width="152" height="152"/>
         <image name="exhibitorsen152X152.png" width="152" height="152"/>
         <image name="facebook_icon.png" width="55" height="55"/>
+        <image name="facebook_icon.png" width="55" height="55"/>
+        <image name="facebook_icon.png" width="55" height="55"/>
         <image name="getConnected152X152.png" width="152" height="152"/>
+        <image name="glyphicons_367_expand.png" width="19" height="19"/>
+        <image name="glyphicons_367_expand.png" width="19" height="19"/>
+        <image name="glyphicons_367_expand.png" width="19" height="19"/>
+        <image name="glyphicons_367_expand.png" width="19" height="19"/>
+        <image name="glyphicons_367_expand.png" width="19" height="19"/>
+        <image name="glyphicons_367_expand.png" width="19" height="19"/>
+        <image name="glyphicons_367_expand.png" width="19" height="19"/>
+        <image name="glyphicons_367_expand.png" width="19" height="19"/>
+        <image name="glyphicons_367_expand.png" width="19" height="19"/>
+        <image name="glyphicons_367_expand.png" width="19" height="19"/>
         <image name="glyphicons_367_expand.png" width="19" height="19"/>
         <image name="infoBooth152X152.png" width="152" height="152"/>
         <image name="internetAccess152X152.png" width="152" height="152"/>
         <image name="leftarrow.png" width="60" height="58"/>
+        <image name="leftarrow.png" width="60" height="58"/>
+        <image name="leftarrow.png" width="60" height="58"/>
         <image name="leftarrow55.png" width="55" height="55"/>
         <image name="linkedin152X152.png" width="152" height="152"/>
+        <image name="linkedlin_icon.png" width="54" height="55"/>
+        <image name="linkedlin_icon.png" width="54" height="55"/>
         <image name="linkedlin_icon.png" width="54" height="55"/>
         <image name="lostFound152X152.png" width="152" height="152"/>
         <image name="magnify_icon.png" width="30" height="30"/>
@@ -15273,9 +15437,27 @@
         <image name="networking.png" width="60" height="58"/>
         <image name="next.png" width="48" height="48"/>
         <image name="normal.png" width="48" height="48"/>
+        <image name="normal.png" width="48" height="48"/>
+        <image name="normal.png" width="48" height="48"/>
+        <image name="normal.png" width="48" height="48"/>
+        <image name="normal.png" width="48" height="48"/>
+        <image name="normal.png" width="48" height="48"/>
+        <image name="normal.png" width="48" height="48"/>
+        <image name="normal.png" width="48" height="48"/>
+        <image name="normal.png" width="48" height="48"/>
+        <image name="normal.png" width="48" height="48"/>
+        <image name="normal.png" width="48" height="48"/>
+        <image name="normal.png" width="48" height="48"/>
+        <image name="normal.png" width="48" height="48"/>
+        <image name="note_icon.png" width="64" height="92"/>
+        <image name="note_icon.png" width="64" height="92"/>
+        <image name="note_icon.png" width="64" height="92"/>
+        <image name="note_icon.png" width="64" height="92"/>
         <image name="note_icon.png" width="64" height="92"/>
         <image name="onSiteService1152X152.png" width="152" height="152"/>
         <image name="pdf_icon.png" width="36" height="36"/>
+        <image name="phone.png" width="73" height="73"/>
+        <image name="phone.png" width="73" height="73"/>
         <image name="phone.png" width="73" height="73"/>
         <image name="photoGallery152X152.png" width="152" height="152"/>
         <image name="photogallery_photos.png" width="400" height="400"/>
@@ -15284,7 +15466,13 @@
         <image name="radio_off.png" width="32" height="32"/>
         <image name="radio_on.png" width="32" height="32"/>
         <image name="recommended_icon.png" width="57" height="57"/>
+        <image name="recommended_icon.png" width="57" height="57"/>
+        <image name="recommended_icon.png" width="57" height="57"/>
+        <image name="recommended_icon.png" width="57" height="57"/>
         <image name="refresh.png" width="30" height="30"/>
+        <image name="remove_icon.png" width="63" height="86"/>
+        <image name="remove_icon.png" width="63" height="86"/>
+        <image name="remove_icon.png" width="63" height="86"/>
         <image name="remove_icon.png" width="63" height="86"/>
         <image name="scheduleBuilder152X152.png" width="152" height="152"/>
         <image name="search152X152.png" width="152" height="152"/>
@@ -15296,11 +15484,15 @@
         <image name="sponsors152X152.png" width="152" height="152"/>
         <image name="twitter152X152.png" width="152" height="152"/>
         <image name="twitter_icon.png" width="55" height="55"/>
+        <image name="twitter_icon.png" width="55" height="55"/>
+        <image name="twitter_icon.png" width="55" height="55"/>
         <image name="venue152X152.png" width="152" height="152"/>
         <image name="venue_img.png" width="432" height="160"/>
         <image name="venue_selected.png" width="342" height="70"/>
+        <image name="venue_selected.png" width="342" height="70"/>
         <image name="venue_selected_new.png" width="342" height="70"/>
         <image name="views_icon.png" width="50" height="37"/>
+        <image name="website.png" width="73" height="73"/>
         <image name="website.png" width="73" height="73"/>
         <image name="whtsHappeningNow152X152.png" width="152" height="152"/>
         <image name="yammer152X152.png" width="152" height="152"/>
@@ -15312,15 +15504,15 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Ych-Ec-uY7"/>
+        <segue reference="tVZ-aL-mV4"/>
+        <segue reference="0yb-4R-0Kf"/>
         <segue reference="r4N-hk-VdN"/>
         <segue reference="xAC-oi-OtW"/>
+        <segue reference="Ych-Ec-uY7"/>
         <segue reference="KZw-8t-nha"/>
-        <segue reference="tVZ-aL-mV4"/>
-        <segue reference="0b9-nf-ozc"/>
         <segue reference="X3n-Td-60R"/>
-        <segue reference="MQg-bt-5IE"/>
-        <segue reference="wHR-hH-bHd"/>
         <segue reference="8nF-o0-ZKZ"/>
+        <segue reference="wHR-hH-bHd"/>
+        <segue reference="0b9-nf-ozc"/>
     </inferredMetricsTieBreakers>
 </document>

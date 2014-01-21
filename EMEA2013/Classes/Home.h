@@ -24,6 +24,10 @@
     NSString *vCardString;
 }
 
+
+@property (strong, nonatomic) IBOutlet UILabel *newlyaddedLabel;
+
+
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *avContactExchange;
 
 @property (nonatomic, retain) LiveConnectClient *liveClient;
