@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>5FCE0D0D-DE75-4E7C-8935-BF814B6EB566</string>
+	<key>IDESourceControlProjectName</key>
+	<string>EMEA2013</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6933DC0B-53CB-4885-92C9-25D376F32288</key>
+		<string>https://sanginfo.svn.cloudforge.com/convergenceemea2013/trunk/EMEA2013</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>EMEA2013/EMEA2013.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6933DC0B-53CB-4885-92C9-25D376F32288</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>6933DC0B-53CB-4885-92C9-25D376F32288</key>
+		<string>https://sanginfo.svn.cloudforge.com/convergenceemea2013</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://sanginfo.svn.cloudforge.com/convergenceemea2013/trunk/EMEA2013/EMEA2013/EMEA2013.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6933DC0B-53CB-4885-92C9-25D376F32288</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryBranchesRelativeLocationKey</key>
+			<string>branches</string>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlRepositoryTagsRelativeLocationKey</key>
+			<string>tags</string>
+			<key>IDESourceControlRepositoryTrunkRelativeLocationKey</key>
+			<string>trunk</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6933DC0B-53CB-4885-92C9-25D376F32288</string>
+			<key>IDESourceControlWCCName</key>
+			<string>EMEA2013</string>
+		</dict>
+	</array>
+</dict>
+</plist>
