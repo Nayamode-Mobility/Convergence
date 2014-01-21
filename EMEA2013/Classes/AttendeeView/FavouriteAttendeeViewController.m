@@ -37,6 +37,16 @@
 	// Do any additional setup after loading the view.
 }
 
+-(IBAction)btnBack_Click:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+-(IBAction)btnSynchFavAttendee_click:(id)sender
+{
+    
+}
+
+
 #pragma mark - UICollectionViewDataSource methods
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {

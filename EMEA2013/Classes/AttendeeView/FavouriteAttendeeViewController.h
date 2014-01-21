@@ -12,4 +12,7 @@
 {
     NSArray *arrFavAttendee;
 }
+
+-(IBAction)btnBack_Click:(id)sender;
+-(IBAction)btnSynchFavAttendee_click:(id)sender;
 @end
