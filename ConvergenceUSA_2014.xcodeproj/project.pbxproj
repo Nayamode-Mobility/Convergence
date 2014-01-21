@@ -425,7 +425,6 @@
 		C8F57D47185EDB3D00720CD9 /* SegoeWP.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8F57BC2185EDB3D00720CD9 /* SegoeWP.ttf */; };
 		C8F57D49185EDB5000720CD9 /* AppSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = C8F57D48185EDB5000720CD9 /* AppSettings.plist */; };
 		C8F57D51185EDCE600720CD9 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8F57D4E185EDCE600720CD9 /* iPad.storyboard */; };
-		C8F57D53185EDD1800720CD9 /* expomap in Resources */ = {isa = PBXBuildFile; fileRef = C8F57D52185EDD1800720CD9 /* expomap */; };
 		C8F57D68185EDDE400720CD9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F57D54185EDDE400720CD9 /* Accounts.framework */; };
 		C8F57D69185EDDE400720CD9 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F57D55185EDDE400720CD9 /* AddressBook.framework */; };
 		C8F57D6A185EDDE400720CD9 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F57D56185EDDE400720CD9 /* AddressBookUI.framework */; };
@@ -448,6 +447,8 @@
 		C8F57D7B185EDDE400720CD9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F57D67185EDDE400720CD9 /* SystemConfiguration.framework */; };
 		C8F57D81185EDE3600720CD9 /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F57D7D185EDE3600720CD9 /* WindowsAzureMobileServices.framework */; };
 		C8F57D85185EFFD900720CD9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F57D84185EFFD900720CD9 /* CoreLocation.framework */; };
+		D425C83A188F1E8E00A2F84D /* ExpoMap.png in Resources */ = {isa = PBXBuildFile; fileRef = D425C838188F1E8E00A2F84D /* ExpoMap.png */; };
+		D425C83B188F1E8E00A2F84D /* hotspots.html in Resources */ = {isa = PBXBuildFile; fileRef = D425C839188F1E8E00A2F84D /* hotspots.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1095,7 +1096,6 @@
 		C8F57BC3185EDB3D00720CD9 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C8F57D48185EDB5000720CD9 /* AppSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppSettings.plist; sourceTree = "<group>"; };
 		C8F57D4F185EDCE600720CD9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPad.storyboard; sourceTree = "<group>"; };
-		C8F57D52185EDD1800720CD9 /* expomap */ = {isa = PBXFileReference; lastKnownFileType = folder; name = expomap; path = ../expomap; sourceTree = "<group>"; };
 		C8F57D54185EDDE400720CD9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		C8F57D55185EDDE400720CD9 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		C8F57D56185EDDE400720CD9 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
@@ -1118,6 +1118,8 @@
 		C8F57D67185EDDE400720CD9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C8F57D7D185EDE3600720CD9 /* WindowsAzureMobileServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WindowsAzureMobileServices.framework; path = EMEA2013/Framework/WindowsAzureMobileServices.framework; sourceTree = "<group>"; };
 		C8F57D84185EFFD900720CD9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D425C838188F1E8E00A2F84D /* ExpoMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ExpoMap.png; sourceTree = "<group>"; };
+		D425C839188F1E8E00A2F84D /* hotspots.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = hotspots.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1264,11 +1266,11 @@
 		C8F578E8185ED7EC00720CD9 = {
 			isa = PBXGroup;
 			children = (
+				D425C837188F1E8E00A2F84D /* expomap */,
 				51A7A0FF18718E8600B80D24 /* Spotlight@2x.png */,
 				51A7A0FE18718E1A00B80D24 /* Settings@2x.png */,
 				51A7A0FC18718DA500B80D24 /* iPhone@2x.png */,
 				B82719B7186039BE002EC25F /* BingMaps.Resources.bundle */,
-				C8F57D52185EDD1800720CD9 /* expomap */,
 				C8F578FA185ED7EC00720CD9 /* ConvergenceUSA_2014 */,
 				C8F578F3185ED7EC00720CD9 /* Frameworks */,
 				C8F578F2185ED7EC00720CD9 /* Products */,
@@ -2443,6 +2445,15 @@
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
+		D425C837188F1E8E00A2F84D /* expomap */ = {
+			isa = PBXGroup;
+			children = (
+				D425C838188F1E8E00A2F84D /* ExpoMap.png */,
+				D425C839188F1E8E00A2F84D /* hotspots.html */,
+			);
+			path = expomap;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2561,7 +2572,6 @@
 				C8F57CB5185EDB3D00720CD9 /* messaging_black.png in Resources */,
 				51C5D9DF1871BAC3009B649E /* HubBG.png in Resources */,
 				C8F57D08185EDB3D00720CD9 /* normal.png in Resources */,
-				C8F57D53185EDD1800720CD9 /* expomap in Resources */,
 				C8F57CFF185EDB3D00720CD9 /* Website_108x108.png in Resources */,
 				C8F57CA9185EDB3D00720CD9 /* leftarrow.png in Resources */,
 				C8F57CC8185EDB3D00720CD9 /* infoBooth152X152.png in Resources */,
@@ -2583,6 +2593,7 @@
 				C8F57CC4185EDB3D00720CD9 /* Parking_108x108.png in Resources */,
 				C8F57CC3185EDB3D00720CD9 /* Museums_108x108.png in Resources */,
 				C8F57D33185EDB3D00720CD9 /* wi-fi.png in Resources */,
+				D425C83A188F1E8E00A2F84D /* ExpoMap.png in Resources */,
 				C8F57C81185EDB3D00720CD9 /* agenda.png in Resources */,
 				C8F57C83185EDB3D00720CD9 /* announcement_detail_image@2x.png in Resources */,
 				C8F57CE0185EDB3D00720CD9 /* internetAccess152X152.png in Resources */,
@@ -2633,6 +2644,7 @@
 				51AE88F018769D5E0031482A /* yammer_icon_new.png in Resources */,
 				C8F57CBA185EDB3D00720CD9 /* mynotesphone.png in Resources */,
 				C8F57CB0185EDB3D00720CD9 /* mail.png in Resources */,
+				D425C83B188F1E8E00A2F84D /* hotspots.html in Resources */,
 				C8F57D2D185EDB3D00720CD9 /* twitter_icon.png in Resources */,
 				C8F57D1C185EDB3D00720CD9 /* rightarrow.png in Resources */,
 				C8F57D11185EDB3D00720CD9 /* prev-photo-arrow-sm.png in Resources */,
