@@ -16,7 +16,7 @@
 #import "sqlite3.h"
 #import "DB.h"
 #import "AttendeeDB.h"
-#
+#import "AppDelegate.h"
 
 @interface AttendeeDetailViewController ()
 
@@ -203,63 +203,69 @@
 - (IBAction)btnAddToFavClick:(id)sender
 {
     
-    
-    if ([self.btnFav.titleLabel.text isEqualToString:@"Add To Favourite"])
+    if (APP.netStatus)
     {
-        self.attendeeData.strIsSynced = @"0";
         
-        AttendeeDB *objAttendee = [AttendeeDB GetInstance];
-        
-        [objAttendee AddFavAttendee:self.attendeeData];
-        
-        [self.btnFav setTitle:@"Remove from Favourite" forState:UIControlStateNormal];
     }
     else
     {
-        AttendeeDB *objAttendee = [AttendeeDB GetInstance];
-        NSString *strSQL = @"Select AttendeeID From FavouriteAttendees Where AttendeeID = ? and IsSynced =1";
-        
-        DB *objDB = [DB GetInstance];
-        if([objDB CheckIfRecordAvailableWithIntKeyWithQuery:[self.attendeeData.strAttendeeID intValue] Query:strSQL] == NO)
+        if ([self.btnFav.titleLabel.text isEqualToString:@"Add To Favourite"])
         {
-            [objAttendee DeleteFavAttendee:[self.attendeeData.strAttendeeID intValue]];
+            self.attendeeData.strIsSynced = @"0";
+            
+            AttendeeDB *objAttendee = [AttendeeDB GetInstance];
+            
+            [objAttendee AddFavAttendee:self.attendeeData];
+            
+            [self.btnFav setTitle:@"Remove from Favourite" forState:UIControlStateNormal];
         }
         else
         {
-            [objAttendee UpdateFavAttendee:self.attendeeData];
+            AttendeeDB *objAttendee = [AttendeeDB GetInstance];
+            NSString *strSQL = @"Select AttendeeID From FavouriteAttendees Where AttendeeID = ? and IsSynced =1";
+            
+            DB *objDB = [DB GetInstance];
+            if([objDB CheckIfRecordAvailableWithIntKeyWithQuery:[self.attendeeData.strAttendeeID intValue] Query:strSQL] == NO)
+            {
+                [objAttendee DeleteFavAttendee:[self.attendeeData.strAttendeeID intValue]];
+            }
+            else
+            {
+                [objAttendee UpdateFavAttendee:self.attendeeData];
+            }
+            
+            
+            //        dbEMEAFY14 = [[DB GetInstance] OpenDatabase];
+            //
+            //        sqlite3_stmt *compiledStmt;
+            //        NSLog(@"title is %@",self.btnFav.titleLabel.text);
+            //
+            //        NSString *strSQL = @"Delete From FavouriteAttendees ";
+            //        strSQL = [strSQL stringByAppendingFormat:@"Where AttendeeID = ? "];
+            //
+            //
+            //        if(sqlite3_prepare_v2(dbEMEAFY14, [strSQL UTF8String], -1, &compiledStmt, NULL) != SQLITE_OK)
+            //        {
+            //            NSLog(@"Error while creating delete statement. %s",sqlite3_errmsg(dbEMEAFY14));
+            //            [ExceptionHandler AddExceptionForScreen:strSCREEN_ATTENDEE MethodName:[NSString stringWithFormat:@"%@",NSStringFromSelector(_cmd)] Exception:[NSString stringWithFormat:@"Error while creating delete statement. %s",sqlite3_errmsg(dbEMEAFY14)]];
+            //        }
+            //        else
+            //        {
+            //            sqlite3_bind_int(compiledStmt, 1, [self.attendeeData.strAttendeeID intValue]);
+            //
+            //            [self.btnFav setTitle:@"Add To Favourites" forState:UIControlStateNormal];
+            //            if( SQLITE_DONE != sqlite3_step(compiledStmt) )
+            //            {
+            //                NSLog(@"Error while creating delete statement. %s",sqlite3_errmsg(dbEMEAFY14));
+            //                [ExceptionHandler AddExceptionForScreen:strSCREEN_ATTENDEE MethodName:[NSString stringWithFormat:@"%@",NSStringFromSelector(_cmd)] Exception:[NSString stringWithFormat:@"Error while creating delete statement. %s",sqlite3_errmsg(dbEMEAFY14)]];
+            //                
+            //                
+            //            }
+            //            
+            //        }
+            
+            
         }
-
-        
-//        dbEMEAFY14 = [[DB GetInstance] OpenDatabase];
-//        
-//        sqlite3_stmt *compiledStmt;
-//        NSLog(@"title is %@",self.btnFav.titleLabel.text);
-//        
-//        NSString *strSQL = @"Delete From FavouriteAttendees ";
-//        strSQL = [strSQL stringByAppendingFormat:@"Where AttendeeID = ? "];
-//        
-//        
-//        if(sqlite3_prepare_v2(dbEMEAFY14, [strSQL UTF8String], -1, &compiledStmt, NULL) != SQLITE_OK)
-//        {
-//            NSLog(@"Error while creating delete statement. %s",sqlite3_errmsg(dbEMEAFY14));
-//            [ExceptionHandler AddExceptionForScreen:strSCREEN_ATTENDEE MethodName:[NSString stringWithFormat:@"%@",NSStringFromSelector(_cmd)] Exception:[NSString stringWithFormat:@"Error while creating delete statement. %s",sqlite3_errmsg(dbEMEAFY14)]];
-//        }
-//        else
-//        {
-//            sqlite3_bind_int(compiledStmt, 1, [self.attendeeData.strAttendeeID intValue]);
-//            
-//            [self.btnFav setTitle:@"Add To Favourites" forState:UIControlStateNormal];
-//            if( SQLITE_DONE != sqlite3_step(compiledStmt) )
-//            {
-//                NSLog(@"Error while creating delete statement. %s",sqlite3_errmsg(dbEMEAFY14));
-//                [ExceptionHandler AddExceptionForScreen:strSCREEN_ATTENDEE MethodName:[NSString stringWithFormat:@"%@",NSStringFromSelector(_cmd)] Exception:[NSString stringWithFormat:@"Error while creating delete statement. %s",sqlite3_errmsg(dbEMEAFY14)]];
-//                
-//                
-//            }
-//            
-//        }
-        
-        
     }
 }
 
