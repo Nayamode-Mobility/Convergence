@@ -13,8 +13,15 @@
 #import "Session.h"
 #import "UserSessionNotes.h"
 
+@protocol SessionNoteDelegate <NSObject>
+@optional
+- (void)noteSaved;
+@end
+
 @interface SessionNoteViewController: UIViewController <UITextFieldDelegate, MFMailComposeViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
 {
+    
+     id<SessionNoteDelegate> delegate;
 }
 
 @property (strong, nonatomic) IBOutlet UILabel *lblName;
@@ -45,6 +52,8 @@
 @property (nonatomic) BOOL blnNew;
 
 @property (strong, nonatomic) IBOutlet UILabel *lblNotesPlaceHolder;
+
+@property (nonatomic, strong) id<SessionNoteDelegate> delegate;
 
 - (IBAction)btnBackClicked:(id)sender;
 - (IBAction)textEditCancel:(id)sender;

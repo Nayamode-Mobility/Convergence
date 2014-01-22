@@ -13,6 +13,8 @@
 #import "Shared.h"
 #import "DeviceManager.h"
 #import "AppDelegate.h"
+#import "Functions.h"
+
 
 @interface LinkedInViewController ()
 {
@@ -75,6 +77,11 @@
     //[UIView addTouchEffect:self.view];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self AskLogin];
+}
+
 - (void)AskLogin
 {
     [self.waitIndicator setHidden:YES];
@@ -102,6 +109,8 @@
         [self getFeed];
     }
 }
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -317,27 +326,24 @@
 
 - (IBAction)PostDiscussion:(id)sender
 {
-//    Shared *objShared = [Shared GetInstance];
-//    
-//    if([objShared GetIsInternetAvailable] == NO)
-//    {
-//        [self showAlert:nil withMessage:strNoInternetError withButton:@"OK" withIcon:nil];
-//        return;
-//    }
-    if (APP.netStatus) {
+    //Shared *objShared = [Shared GetInstance];
+    
+    //if([objShared GetIsInternetAvailable] == NO)
+    //{
+    //    [self showAlert:nil withMessage:strNoInternetError withButton:@"OK" withIcon:nil];
+    //    return;
+    //}
     
     NSString *linkedinURL = [NSString stringWithFormat:@"http://www.linkedin.com/groups?home=&gid=%@&oauth2_access_token=%@",LINKED_GROUP_ID,self.authToken];
-    NSURL *url = [NSURL URLWithString:linkedinURL];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    //NSURL *url = [NSURL URLWithString:linkedinURL];
+    //NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
-    [self.webPostDiscussion setScalesPageToFit:YES];
-    [self.webPostDiscussion loadRequest:request];
+    //[self.webPostDiscussion setScalesPageToFit:YES];
+    //[self.webPostDiscussion loadRequest:request];
     
-    [self.webPostDiscussion setHidden:NO];
-    }else{
-        NETWORK_ALERT();
-        return;
-    }
+    //[self.webPostDiscussion setHidden:NO];
+    
+    [Functions OpenWebsite:linkedinURL];
 }
 
 #pragma mark - UICollectionViewDataSource methods
@@ -356,31 +362,85 @@
     LinkedInFeedCustomeCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"TCell" forIndexPath:indexPath];
     NSDictionary *objTweet = [self.feedData objectAtIndex:indexPath.row];
     
-    NSDictionary *displayData=[objTweet objectForKey:@"creator"];
+    NSDictionary *displayData = [objTweet objectForKey:@"creator"];
     
-    cell.lblName.text=[NSString stringWithFormat:@"%@ %@",[displayData objectForKey:@"firstName"],[displayData objectForKey:@"lastName"]];
-    NSDate *dtStartDate=[NSDate dateWithTimeIntervalSince1970:([[objTweet objectForKey:@"creationTimestamp"] longValue] / 1000)];
-    
-    NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
-    [dateFormater setDateFormat:@"EEE MMM dd HH:mm:ss +zzzz YYYY"];
-    [dateFormater setDateFormat:@"EEEE, dd MMM. HH:mm a"];
-    cell.lblDate.text = [NSString stringWithFormat:@"%@",[dateFormater stringFromDate:dtStartDate]];
+    cell.lblName.text = [NSString stringWithFormat:@"%@ %@",[displayData objectForKey:@"firstName"],[displayData objectForKey:@"lastName"]];
     
     [cell.txtContent setText:[NSString stringWithFormat:@"%@\n%@",[NSString stringWithString:[objTweet objectForKey:@"title"]],[NSString stringWithString:[displayData objectForKey:@"headline"]]]];
+    cell.txtContent.scrollEnabled = NO;
+    [cell.txtContent setContentInset:UIEdgeInsetsMake(-5, -5, -5, -5)];
+    
+    CGRect rect = cell.txtContent.frame;
+    CGSize size2 = [cell.txtContent sizeThatFits:CGSizeMake(240, FLT_MAX)];
+    rect.size.height = size2.height;
+    cell.txtContent.frame = rect;
+    
+    NSDate *dtStartDate = [NSDate dateWithTimeIntervalSince1970:([[objTweet objectForKey:@"creationTimestamp"] doubleValue] / 1000)];
+    NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
+    [dateFormater setDateFormat:@"EEE MMM dd HH:mm:ss +zzzz YYYY"];
+    [dateFormater setDateFormat:@"EEEE, dd MMM. hh:mm a"];
+    cell.lblDate.text = [NSString stringWithFormat:@"%@",[dateFormater stringFromDate:dtStartDate]];
+    cell.lblDate.frame = CGRectMake(cell.lblDate.frame.origin.x, (cell.txtContent.frame.origin.y + cell.txtContent.frame.size.height), cell.lblDate.frame.size.width, cell.lblDate.frame.size.height);
+    
+    //NSLog(@"render %.f",cell.frame.size.height);
+    if ([DeviceManager IsiPhone])
+    {
+        //cell.vwLine.frame = CGRectMake(0, (cell.lblDatetime.frame.origin.y + 30), 300, 1);
+        cell.vwLine.frame = CGRectMake(0, (cell.frame.size.height - 1), 300, 1);
+    }
+    
+    cell.imgWho.image = nil;
     NSURL *imgURL = [NSURL URLWithString:[displayData objectForKey:@"pictureUrl"]];
     NSURLRequest *imgRequest = [NSURLRequest requestWithURL:imgURL];
     [NSURLConnection sendAsynchronousRequest:imgRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response,
                                                                                                                NSData *data,
-                                                                                                               NSError *error){
-        if (!error) {
-            cell.imgWho.image = [UIImage imageWithData:data];
-        }
-    }];
+                                                                                                               NSError *error)
+     {
+         if (!error)
+         {
+             cell.imgWho.image = [UIImage imageWithData:data];
+         }
+     }];
     
     //[UIView addTouchEffect:cell.contentView];
     
     return cell;
 }
+
+- (CGSize)collectionView:(UICollectionView *)cv layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGSize expectedLabelSize = CGSizeMake(0, 0);
+    
+    NSDictionary *objTweet = [self.feedData objectAtIndex:indexPath.row];
+    NSDictionary *objFeed = [objTweet objectForKey:@"creator"];
+    
+    [self.textView setContentInset:UIEdgeInsetsMake(-5, -5, -5, -5)];
+    
+    UIFont *font = [UIFont fontWithName:@"SegoeWP" size:17.0f];
+    
+    [self.textView setFont:font];
+    [self.textView setText:[NSString stringWithFormat:@"%@ %@",[objFeed objectForKey:@"firstName"],[objFeed objectForKey:@"lastName"]]];
+    CGSize size1 = [self.textView sizeThatFits:CGSizeMake(240, FLT_MAX)];
+    
+    font = [UIFont fontWithName:@"SegoeWP" size:14.0f];
+    
+    [self.textView setFont:font];
+    [self.textView setText:[NSString stringWithFormat:@"%@\n%@",[NSString stringWithString:[objTweet objectForKey:@"title"]],[NSString stringWithString:[objFeed objectForKey:@"headline"]]]];
+    CGSize size2 = [self.textView sizeThatFits:CGSizeMake(240, FLT_MAX)];
+    
+    NSDate *dtStartDate = [NSDate dateWithTimeIntervalSince1970:([[objTweet objectForKey:@"creationTimestamp"] longValue] / 1000)];
+    NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
+    [dateFormater setDateFormat:@"EEE MMM dd HH:mm:ss +zzzz YYYY"];
+    [dateFormater setDateFormat:@"EEEE, dd MMM. HH:mm a"];
+    [self.textView setText:[NSString stringWithFormat:@"%@",[dateFormater stringFromDate:dtStartDate]]];
+    CGSize size3 = [self.textView sizeThatFits:CGSizeMake(240, FLT_MAX)];
+    
+    expectedLabelSize.height = size1.height + size2.height + size3.height;
+    
+    //NSLog(@"size %.f",expectedLabelSize.height);
+    return (CGSize) {.width = 300, .height = expectedLabelSize.height};
+}
+
 
 /*
 - (CGSize)collectionView:(UICollectionView *)cv layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

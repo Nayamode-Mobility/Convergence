@@ -177,4 +177,39 @@
 	[currentAlert show];
 }
 
++ (UIViewController *)GetTopViewController:(UINavigationController *)objRootViewController
+{
+    //NSArray *arrVCs = [objRootViewController viewControllers];
+    
+    NSInteger intVCs = [[objRootViewController viewControllers] count];
+    
+    if (intVCs < 2)
+    {
+        return nil;
+    }
+    else
+    {
+        //NSLog(@"%@",[[objRootViewController viewControllers] objectAtIndex:intVCs - 1]);
+        return [[objRootViewController viewControllers] objectAtIndex:intVCs - 1];
+    }
+}
+
++ (UIViewController *)HasViewController:(UINavigationController *)objRootViewController ViewController:(UIViewController *)objVC
+{
+    //NSArray *arrVCs = [objRootViewController viewControllers];
+    
+    //NSInteger intVCs = [[objRootViewController viewControllers] count];
+    
+    for(UIViewController *vc in [objRootViewController viewControllers])
+    {
+        if([vc isKindOfClass:[objVC class]])
+        {
+            return vc;
+        }
+    }
+    
+    return nil;
+}
+
+
 @end

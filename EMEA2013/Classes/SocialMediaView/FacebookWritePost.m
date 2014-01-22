@@ -271,6 +271,18 @@
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error
 {
+    NSLog(@"%@",error.userInfo);
+    NSLog(@"%@",[[(NSDictionary *)error.userInfo objectForKey:@"error"] objectForKey:@"message"]);
+    
+    NSString *strError = [[(NSDictionary *)error.userInfo objectForKey:@"error"] objectForKey:@"message"];
+    //NSDictionary *dictError = [[(NSDictionary *)error.userInfo objectForKey:@"error"] objectForKey:@"message"];
+    
+    [self showAlert:Nil withMessage:strError withButton:@"OK" withIcon:nil];
+    
+    [[self vwLoading] setHidden:YES];
+    [[self avLoading] stopAnimating];
+    
+    
 }
 
 - (void)request:(FBRequest *)request didLoad:(id)result

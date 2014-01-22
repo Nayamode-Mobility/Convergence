@@ -56,6 +56,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshAnnouncement) name:@"SyncUpCompleted" object:nil];
+    
 	// Do any additional setup after loading the view.
     if (items == nil) {
         items = [NSArray arrayWithObjects:@"1",@"2",@"3",@"4",@"5",nil] ;
@@ -342,6 +345,25 @@
         controller.announcementData = (Announcement *)announcementCell.cellData;
     }
 }
+
+
+- (void)RefreshAnnouncement
+{
+    AnnouncementDB *objAnnouncementDB = [AnnouncementDB GetInstance];
+    self.announcementsData = [objAnnouncementDB GetAnnouncements];
+    if ([DeviceManager IsiPad])
+    {
+        if ([self.announcementsData count]> 0)
+        {
+            [self setDataForIndex:0];
+        }
+    }
+    else
+    {
+        [self.venuesCollectionView reloadData];
+    }
+}
+
 
 - (IBAction)btnBackClicked:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];

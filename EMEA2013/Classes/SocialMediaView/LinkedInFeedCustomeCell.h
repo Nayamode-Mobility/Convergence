@@ -19,5 +19,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblDate;
 @property (strong, nonatomic) IBOutlet UITextView *txtContent;
 
+@property (strong, nonatomic) IBOutlet UIView *vwLine;
+
 -(void)setData:(NSDictionary *)cellData;
 @end

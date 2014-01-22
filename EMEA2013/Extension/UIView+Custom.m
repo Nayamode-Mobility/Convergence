@@ -56,6 +56,19 @@ BOOL addedOverLay = NO;
     }
 }
 
++ (void)addTouchEffectV2:(UIView *)appView
+{
+    for (UIView *v in [appView allSubViews])
+    {
+        if([v isKindOfClass:[UIButton class]])
+        {
+            [((UIButton*)v) addTarget:self action:@selector(changeButtonBGColor:) forControlEvents:UIControlEventTouchDown];
+            //[((UIButton*)v) addTarget:self action:@selector(resetButtonBGColor:) forControlEvents:UIControlEventTouchUpOutside];
+            //[((UIButton*)v) addTarget:self action:@selector(resetButtonBGColor:) forControlEvents:UIControlEventTouchUpInside];
+        }
+    }
+}
+
 /*
 + (void)ButtonTouchEvents:(UIButton *)sender event:(UIEvent *)event{
      NSLog(@"events %d", event.subtype);
@@ -191,4 +204,29 @@ BOOL addedOverLay = NO;
         [self Expand:sender];
     }];
 }
+
++ (void)resetButtonBGColor:(UIButton*)sender
+{
+    NSLog(@"%@",@"Reset BG");
+    //NSLog(@"Reset BG Width: %.2f",sender.frame.size.width);
+    //NSLog(@"Reset BG Height: %.2f",sender.frame.size.height);
+    [sender setBackgroundColor:[UIColor clearColor]];
+}
+
++ (void)changeButtonBGColor:(UIButton*)sender
+{
+    NSLog(@"%@",@"Change BG");
+    //NSLog(@"Reset BG Width: %.2f",sender.frame.size.width);
+    //NSLog(@"Reset BG Height: %.2f",sender.frame.size.height);
+    [sender setBackgroundColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.3]];
+    
+    double delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
+                   {
+                       [self resetButtonBGColor:sender];
+                   });
+}
+
+
 @end

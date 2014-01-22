@@ -84,6 +84,9 @@
     [Analytics AddAnalyticsForScreen:strSCREEN_SETTINGS];
     
     //[UIView addTouchEffect:self.view];
+    
+    [APP hideBottomPullOutMenu];
+    
 }
 
 - (void)didReceiveMemoryWarning

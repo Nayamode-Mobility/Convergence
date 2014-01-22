@@ -22,6 +22,8 @@
 @end
 
 @implementation SessionNoteViewController
+@synthesize delegate;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -351,6 +353,8 @@
         }
         
         [self showAlert:@"" withMessage:@"Your note has been saved." withButton:@"OK" withIcon:nil];
+        
+        [delegate noteSaved];
         
         [self.navigationController popViewControllerAnimated:YES];
     }

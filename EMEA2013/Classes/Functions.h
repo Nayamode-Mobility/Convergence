@@ -33,4 +33,8 @@
 + (NSString *)URLEncode:(NSString*)strValue;
 
 + (NSString*)GetGUID;
+
++ (UIViewController *)GetTopViewController:(UIViewController *)objRootViewController;
++ (UIViewController *)HasViewController:(UINavigationController *)objRootViewController ViewController:(UIViewController*)objVC;
+
 @end

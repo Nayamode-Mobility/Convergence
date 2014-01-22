@@ -28,6 +28,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
 	// Do any additional setup after loading the view.
     
     [Analytics AddAnalyticsForScreen:strSCREEN_INTERNET_ACCESS];

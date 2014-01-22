@@ -37,6 +37,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshSponsors) name:@"SyncUpCompleted" object:nil];
+    
     [[[self btnSearch] layer] setBorderWidth:2.0f];
     [[[self btnSearch] layer] setBorderColor:[UIColor whiteColor].CGColor];
     
@@ -248,6 +250,19 @@
 }
 
 - (IBAction)btnRefreshClicked:(id)sender
+{
+    //Do not remove the search for 4 spaces
+ 
+    //[[self txtSearch] setText:@"    "];
+    
+    //[self btnSearchClicked:[self btnSearch]];
+    
+    //[[self txtSearch] setText:@""];
+    
+    [self RefreshSponsors];
+}
+
+- (void)RefreshSponsors
 {
     //Do not remove the search for 4 spaces
     [[self txtSearch] setText:@"    "];

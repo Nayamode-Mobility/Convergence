@@ -37,6 +37,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshEmergency) name:@"SyncUpCompleted" object:nil];
+    
     [[self avLoadingVenurFloorPlan] startAnimating];
     
     if ([DeviceManager IsiPad])
@@ -184,6 +186,25 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (void)RefreshEmergency
+{
+    EventInfoDB *objEventInfoDB = [EventInfoDB GetInstance];
+    self.emergencyOverviewData = [[objEventInfoDB GetEmergencyOverview] objectAtIndex:0];
+    
+    if (self.arrHospitals == nil)
+    {
+        self.arrHospitals = [[NSArray alloc] init];
+    }
+    self.arrHospitals = [objEventInfoDB GetEmergencyHospitals];
+    
+    if (self.arrFloorPlans == nil)
+    {
+        self.arrFloorPlans = [[NSArray alloc] init];
+    }
+    self.arrFloorPlans = [objEventInfoDB GetEmergencyFloorPlans];
+}
+
 
 #pragma mark - Table view data source
 

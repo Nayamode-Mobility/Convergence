@@ -34,6 +34,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshOnSiteService) name:@"SyncUpCompleted" object:nil];
+    
     self.intSelectedIndex = 0;
     
     if (self.arrOnSiteServices == nil)
@@ -99,6 +102,17 @@
             [self.svwOnSiteServices setContentOffset:CGPointMake(0, 0) animated:YES];
         }
     }
+}
+
+- (void)RefreshOnSiteService
+{
+    if (self.arrOnSiteServices == nil)
+    {
+        self.arrOnSiteServices = [[NSArray alloc] init];
+    }
+    
+    EventInfoDB *objEventInfoDB = [EventInfoDB GetInstance];
+    self.arrOnSiteServices = [objEventInfoDB GetOnsiteService];
 }
 
 #pragma mark - UICollectionViewDataSource methods

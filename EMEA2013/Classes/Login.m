@@ -86,7 +86,9 @@
     
     [self configureLiveClientWithScopes];
     
-    //[UIView addTouchEffect:self.view];    
+    //[UIView addTouchEffect:self.view];
+    
+    [APP hideBottomPullOutMenu];
 }
 
 - (void)didReceiveMemoryWarning

@@ -33,6 +33,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshFAQs) name:@"SyncUpCompleted" object:nil];
+    
 	// Do any additional setup after loading the view.
     
     if (self.arrFAQs == nil) {
@@ -103,6 +106,17 @@
             [self.svwFAQs setContentOffset:CGPointMake(0, 0) animated:YES];
         }
     }
+}
+
+- (void)RefreshFAQs
+{
+    if (self.arrFAQs == nil)
+    {
+        self.arrFAQs = [[NSArray alloc] init];
+    }
+    
+    MasterDB *objMasterDB = [MasterDB GetInstance];
+    self.arrFAQs = [objMasterDB GetFAQ];
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {

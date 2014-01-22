@@ -16,5 +16,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnPost;
 @property (strong, nonatomic) IBOutlet UILabel *lblNoFeeds;
 
+
+@property (strong, nonatomic) IBOutlet UITextView *textView;
+
+
 - (IBAction)PostDiscussion:(id)sender;
 @end
