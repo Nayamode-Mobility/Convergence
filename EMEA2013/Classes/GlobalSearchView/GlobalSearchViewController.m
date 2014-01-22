@@ -56,6 +56,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshGlobalSearch) name:@"SyncUpCompleted" object:nil];
+    
     [self.svwGlobalSearch setHidden:YES];
     
     [[[self btnSearch] layer] setBorderWidth:2.0f];
@@ -277,6 +280,14 @@
 - (IBAction)btnBackClicked:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)RefreshGlobalSearch
+{
+    if(![NSString IsEmpty:self.txtSearch.text shouldCleanWhiteSpace:YES])
+    {
+        [self btnSearchClicked:[self btnSearch]];
+    }
 }
 
 - (IBAction)btnSearchClicked:(id)sender

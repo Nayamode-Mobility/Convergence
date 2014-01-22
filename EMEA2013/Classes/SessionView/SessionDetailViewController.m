@@ -369,6 +369,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)btnBackClicked:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 
 -(IBAction)AddToMySchedule:(id)sender
@@ -378,38 +382,40 @@
     MySessionDB *objMySessionDB = [MySessionDB GetInstance];
     blnResult = [objMySessionDB AddSession:self.sessionData.strSessionInstanceID];
     
-    self.vwAddToMySchedule.hidden = YES;
-    self.vwRemoveFromMySchedule.hidden = NO;
+    User *objUser = [User GetInstance];
     
-    [self showAlert:nil withMessage:@"Session added to your schedule." withButton:@"OK" withIcon:nil];
-
-//    User *objUser = [User GetInstance];
-//
-//    NSString *strURL = strAPI_URL;
-//    strURL = [strURL stringByAppendingString:strAPI_SESSION_ADD_MY_SESSION_LIST];
-//    
-//    NSURL *URL = [NSURL URLWithString:strURL];
-//    
-//    NSMutableURLRequest *objRequest = [[NSMutableURLRequest alloc] initWithURL:URL];
-//    [objRequest setHTTPMethod:@"POST"];
-//    [objRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-//    //[objRequest addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-//    [objRequest addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//    
-//    [objRequest addValue:strAPI_AUTH_TOKEN forHTTPHeaderField:@"Authorization-token"];
-//    //[objRequest addValue:@"iPhone" forHTTPHeaderField:@"DeviceType"];
-//    [objRequest addValue:[DeviceManager GetDeviceType] forHTTPHeaderField:@"DeviceType"];
-//    [objRequest addValue:[objUser GetAccountEmail] forHTTPHeaderField:@"EmailId"];
-//    
-//    [objRequest addValue:self.sessionData.strSessionInstanceID forHTTPHeaderField:@"SessionInstanceId"];
-//    [objRequest addValue:@"false" forHTTPHeaderField:@"IsScheduleRemoved"];
-//    
-//    objConnection = [[NSURLConnection alloc] initWithRequest:objRequest delegate:self startImmediately:YES tag:OPER_ADD_MY_SESSION_LIST];
+    NSString *strURL = strAPI_URL;
+    strURL = [strURL stringByAppendingString:strAPI_SESSION_ADD_MY_SESSION_LIST];
+    
+    NSURL *URL = [NSURL URLWithString:strURL];
+    
+    NSMutableURLRequest *objRequest = [[NSMutableURLRequest alloc] initWithURL:URL];
+    [objRequest setHTTPMethod:@"POST"];
+    [objRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    //[objRequest addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [objRequest addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    [objRequest addValue:strAPI_AUTH_TOKEN forHTTPHeaderField:@"Authorization-token"];
+    //[objRequest addValue:@"iPhone" forHTTPHeaderField:@"DeviceType"];
+    [objRequest addValue:[DeviceManager GetDeviceType] forHTTPHeaderField:@"DeviceType"];
+    [objRequest addValue:[objUser GetAccountEmail] forHTTPHeaderField:@"EmailId"];
+    
+    [objRequest addValue:self.sessionData.strSessionInstanceID forHTTPHeaderField:@"SessionInstanceId"];
+    [objRequest addValue:@"false" forHTTPHeaderField:@"IsScheduleRemoved"];
+    
+    objConnection = [[NSURLConnection alloc] initWithRequest:objRequest delegate:self startImmediately:YES tag:OPER_ADD_MY_SESSION_LIST];
 }
 
 - (IBAction)RemoveFromMySchedule:(id)sender
 {
-    //Shared *objShared = [Shared GetInstance];
+    Shared *objShared = [Shared GetInstance];
+    
+    if([objShared GetIsInternetAvailable] == NO)
+    {
+        [self showAlert:nil withMessage:strNoInternetError withButton:@"OK" withIcon:nil];
+        return;
+    }
+    
     
     UIAlertView *confirm = [[UIAlertView alloc]
                             initWithTitle:nil
@@ -428,6 +434,30 @@
     
     MySessionDB *objMySessionDB = [MySessionDB GetInstance];
     blnResult = [objMySessionDB DeleteSession:self.sessionData.strSessionInstanceID];
+    
+    User *objUser = [User GetInstance];
+    
+    NSString *strURL = strAPI_URL;
+    strURL = [strURL stringByAppendingString:strAPI_SESSION_ADD_MY_SESSION_LIST];
+    
+   
+    NSURL *URL = [NSURL URLWithString:strURL];
+    
+    NSMutableURLRequest *objRequest = [[NSMutableURLRequest alloc] initWithURL:URL];
+    [objRequest setHTTPMethod:@"POST"];
+    [objRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    //[objRequest addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [objRequest addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    [objRequest addValue:strAPI_AUTH_TOKEN forHTTPHeaderField:@"Authorization-token"];
+    //[objRequest addValue:@"iPhone" forHTTPHeaderField:@"DeviceType"];
+    [objRequest addValue:[DeviceManager GetDeviceType] forHTTPHeaderField:@"DeviceType"];
+    [objRequest addValue:[objUser GetAccountEmail] forHTTPHeaderField:@"EmailId"];
+    
+    [objRequest addValue:self.sessionData.strSessionInstanceID forHTTPHeaderField:@"SessionInstanceId"];
+    [objRequest addValue:@"true" forHTTPHeaderField:@"IsScheduleRemoved"];
+    
+    objConnection = [[NSURLConnection alloc] initWithRequest:objRequest delegate:self startImmediately:YES tag:OPER_REMOVE_MY_SESSION_LIST];
     
     self.vwAddToMySchedule.hidden = NO;
     self.vwRemoveFromMySchedule.hidden = YES;
@@ -1060,13 +1090,20 @@
     }
     if([segue.identifier isEqualToString:@"gotoAddNote"])
     {
-        SessionNoteViewController *controller = segue.destinationViewController;
-        controller.sessionData = self.sessionData;
-        controller.strSessionInstanceID = self.sessionData.strSessionInstanceID;
-        controller.blnNew = YES;
+       // SessionNoteViewController *controller = segue.destinationViewController;
+       // controller.sessionData = self.sessionData;
+       // controller.strSessionInstanceID = self.sessionData.strSessionInstanceID;
+       // controller.blnNew = YES;
+        
+        self.objSessionNoteViewController = [[SessionNoteViewController alloc] init];
+        self.objSessionNoteViewController = segue.destinationViewController;
+        self.objSessionNoteViewController.sessionData = self.sessionData;
+        self.objSessionNoteViewController.strSessionInstanceID = self.sessionData.strSessionInstanceID;
+        self.objSessionNoteViewController.blnNew = YES;
+        self.objSessionNoteViewController.delegate = self;
     }
     
-    if ([segue.identifier isEqualToString:@"loadEvaluation2"])
+    else if ([segue.identifier isEqualToString:@"loadEvaluation2"])
     {
         //Shared *objShared = [Shared GetInstance];
         
@@ -1233,12 +1270,6 @@
 }
 
 
-- (IBAction)btnBackClicked:(id)sender {
-    
-  
-        [self.navigationController popViewControllerAnimated:YES];
-    
-}
 
 - (IBAction)btnSocialMediaClicked:(id)sender {
        // Shared *objShared = [Shared GetInstance];
@@ -1317,4 +1348,11 @@
     }
 }
 #pragma mark  -
+
+- (void)noteSaved
+{
+    self.btnTakeNotes.hidden = YES;
+    self.btnViewNotes.hidden = NO;
+}
+
 @end

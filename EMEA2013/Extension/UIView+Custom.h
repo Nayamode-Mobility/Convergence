@@ -15,5 +15,8 @@
 + (void)addTouchEffectV1:(UIView *) appView;
 + (void)changetouchcolor:(UIButton *) sender;
 + (void)resettouchcolor: (UIButton*)sender;
+
++ (void)addTouchEffectV2:(UIView *)appView;
+
 //+ (void)ButtonTouchEvents:(UIButton *)sender event:(UIEvent *)event;
 @end

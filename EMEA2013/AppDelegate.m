@@ -9,6 +9,18 @@
 #import "AppDelegate.h"
 #import "Shared.h"
 #import "Reachability.h"
+#import "Constants.h"
+#import "DeviceManager.h"
+#import "Login.h"
+#import "SyncUp.h"
+#import "GlobalSearchViewController.h"
+#import "User.h"
+#import "AppSettings.h"
+#import "Home.h"
+#import "Functions.h"
+
+
+
 
 @implementation AppDelegate
 
@@ -27,6 +39,9 @@
 	[self.internetReachability startNotifier];
 
     NSSetUncaughtExceptionHandler(&HandleUncaughtException);
+    
+    
+    [self addBottomPullOutMenu];
     
     return YES;
 }
@@ -101,5 +116,234 @@ void HandleUncaughtException(NSException *objException)
 {
     [ExceptionHandler AddExceptionForScreen:@"" MethodName:@"Uncaught exception" Exception:[objException description]];
 }
+
+#pragma mark Bottom Menu
+- (void) addBottomPullOutMenu
+{
+    //UIViewController *objRootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    //objRootViewController = [Functions GetTopViewController:objRootViewController];
+    
+    //NSLog(@"%@",objRootViewController);
+    
+    //UIButton *btnOverlay = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.window.rootViewController.view.frame.size.width, self.window.rootViewController.view.frame.size.height)];
+    //[btnOverlay setBackgroundColor:[UIColor redColor]];
+    //[self.self.window.rootViewController.view addSubview:btnOverlay];
+    
+    CGFloat xOffset = 0;
+    if([DeviceManager IsiPad] == YES)
+    {
+        xOffset = 352;
+    }
+    
+    //NSLog(@"%d",[[[UIDevice currentDevice] systemVersion] integerValue]);
+    pullUpView = [[StyledPullableView alloc] initWithFrame:CGRectMake(xOffset, 0, 320, self.window.rootViewController.view.frame.size.height)];
+    if ([DeviceManager IsiPhone])
+    {
+        if([DeviceManager Is4Inch] == YES)
+        {
+            if([[DeviceManager GetDeviceSystemVersion] integerValue] < 7)
+            {
+                pullUpView.openedCenter = CGPointMake(160 + xOffset,self.window.rootViewController.view.frame.size.height + 185);
+                pullUpView.closedCenter = CGPointMake(160 + xOffset, self.window.rootViewController.view.frame.size.height + 255);
+            }
+            else
+            {
+                pullUpView.openedCenter = CGPointMake(160 + xOffset,self.window.rootViewController.view.frame.size.height + 200);
+                pullUpView.closedCenter = CGPointMake(160 + xOffset, self.window.rootViewController.view.frame.size.height + 270);
+            }
+        }
+        else
+        {
+            if([[DeviceManager GetDeviceSystemVersion] integerValue] < 7)
+            {
+                pullUpView.openedCenter = CGPointMake(160 + xOffset,self.window.rootViewController.view.frame.size.height + 141);
+                pullUpView.closedCenter = CGPointMake(160 + xOffset, self.window.rootViewController.view.frame.size.height + 211);
+            }
+            else
+            {
+                pullUpView.openedCenter = CGPointMake(160 + xOffset,self.window.rootViewController.view.frame.size.height + 155);
+                pullUpView.closedCenter = CGPointMake(160 + xOffset, self.window.rootViewController.view.frame.size.height + 225);
+            }
+        }
+    }
+    else
+    {
+        pullUpView.openedCenter = CGPointMake(160 + xOffset,self.window.rootViewController.view.frame.size.height + 160);
+        pullUpView.closedCenter = CGPointMake(160 + xOffset, self.window.rootViewController.view.frame.size.height + 220);
+    }
+    
+    pullUpView.center = pullUpView.closedCenter;
+    pullUpView.handleView.frame = CGRectMake(0, 0, 320, 40);
+    pullUpView.delegate = self;
+    [self.window.rootViewController.view addSubview:pullUpView];
+}
+
+- (void)hideBottomPullOutMenu
+{
+    [pullUpView setHidden:YES];
+}
+
+- (void)showBottomPullOutMenu
+{
+    [pullUpView setHidden:NO];
+}
+#pragma mark -
+
+#pragma mark PullableView Events
+- (void)pullableView:(PullableView *)pView didChangeState:(BOOL)opened
+{
+    if(opened == YES)
+    {
+        //[self svwMain].frame = CGRectMake([self svwMain].frame.origin.x, [self svwMain].frame.origin.y, [self svwMain].frame.size.width, ([self svwMain].frame.size.height - [pView frame].size.height));
+        //NSLog(@"%0.2f",[pView frame].size.height);
+        //[self svwMain].contentSize = CGSizeMake([self svwMain].contentSize.width , ([self svwMain].contentSize.height - [pView frame].size.height));
+    }
+}
+
+- (void)pullableView:(PullableView *)pView refreshData:(UITapGestureRecognizer *)gesture
+{
+    //SyncUp *objSyncUp = [[SyncUp alloc] init];
+    //[objSyncUp SyncUp];
+    
+    SyncUp *vcSyncUp;
+    
+    if([DeviceManager IsiPad] == YES)
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPad" bundle: nil];
+        vcSyncUp = [storyboard instantiateViewControllerWithIdentifier:@"idSyncUp"];
+    }
+    else
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle: nil];
+        vcSyncUp = [storyboard instantiateViewControllerWithIdentifier:@"idSyncUp"];
+    }
+    
+    vcSyncUp.blnCalledFromHome = YES;
+    [(UINavigationController*)self.window.rootViewController pushViewController:vcSyncUp animated:YES];
+}
+
+- (void)pullableView:(PullableView *)pView loadSearch:(UITapGestureRecognizer *)gesture
+{
+    UIViewController *objVC = [Functions GetTopViewController:(UINavigationController*)self.window.rootViewController];
+    
+    if([objVC isKindOfClass:[GlobalSearchViewController class]])
+    {
+        return;
+    }
+    
+    //[self performSegueWithIdentifier:@"loadSearch" sender:gesture];
+    
+    GlobalSearchViewController *vcGlobalSearchViewController;
+    
+    if([DeviceManager IsiPad] == YES)
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPad" bundle: nil];
+        vcGlobalSearchViewController = [storyboard instantiateViewControllerWithIdentifier:@"idGlobalSearch"];
+    }
+    else
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle: nil];
+        vcGlobalSearchViewController = [storyboard instantiateViewControllerWithIdentifier:@"idGlobalSearch"];
+    }
+    
+    [(UINavigationController*)self.window.rootViewController pushViewController:vcGlobalSearchViewController animated:YES];
+}
+
+- (void)pullableView:(PullableView *)pView loadResources:(UITapGestureRecognizer *)gesture
+{
+    UIViewController *objVC = [Functions GetTopViewController:(UINavigationController*)self.window.rootViewController];
+    
+    //[svwMain setContentOffset:CGPointMake(1920.0f, svwMain.frame.origin.y) animated:YES];
+    
+    Home *vcHome;
+    
+    if([DeviceManager IsiPad] == YES)
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPad" bundle: nil];
+        vcHome = [storyboard instantiateViewControllerWithIdentifier:@"idHome"];
+    }
+    else
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle: nil];
+        vcHome = [storyboard instantiateViewControllerWithIdentifier:@"idHome"];
+    }
+    
+    if([objVC isKindOfClass:[Home class]])
+    {
+        [((Home*)objVC) GoToLayerV1:1920.0f];
+    }
+    else
+    {
+        objVC = [Functions HasViewController:(UINavigationController*)self.window.rootViewController ViewController:vcHome];
+        if(objVC != nil)
+        {
+            [(UINavigationController*)self.window.rootViewController popToViewController:objVC animated:YES];
+            [((Home*)objVC) GoToLayerV1:1920.0f];
+        }
+        else
+        {
+            vcHome.intNavigateToTag = 1920.0f;
+            [(UINavigationController*)self.window.rootViewController pushViewController:vcHome animated:YES];
+        }
+    }
+}
+
+- (void)pullableView:(PullableView *)pView logout:(UITapGestureRecognizer *)gesture
+{
+    User *objUser = [User GetInstance];
+    [objUser ClearUserInfo];
+    
+    AppSettings  *objAppSettings = [AppSettings GetInstance];
+    [objAppSettings ClearAppSettings];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:strUSER_DEFAULT_KEY_USER_INFO];
+    
+    [self configureLiveClientWithScopes];
+    [self logout];
+    
+    Login *vcLogin;
+    
+    if([DeviceManager IsiPad] == YES)
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPad" bundle: nil];
+        vcLogin = [storyboard instantiateViewControllerWithIdentifier:@"idLogin"];
+    }
+    else
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle: nil];
+        vcLogin = [storyboard instantiateViewControllerWithIdentifier:@"idLogin"];
+    }
+    
+    [(UINavigationController*)self.window.rootViewController pushViewController:vcLogin animated:YES];
+}
+#pragma mark -
+
+#pragma mark logout Methods
+- (void)configureLiveClientWithScopes
+{
+    if ([strLIVESDK_CLIENT_ID isEqualToString:@"%CLIENT_ID%"])
+    {
+        [NSException raise:NSInvalidArgumentException format:@"The CLIENT_ID value must be specified."];
+    }
+    
+    self.liveClient = [[LiveConnectClient alloc] initWithClientId:strLIVESDK_CLIENT_ID
+                                                           scopes:[strLIVESDK_SCOPES componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
+                                                         delegate:nil
+                                                        userState:strLIVESDK_INIT];
+}
+
+- (void) logout
+{
+    @try
+    {
+        [self.liveClient logoutWithDelegate:nil userState:strLIVESDK_LOGOUT];
+    }
+    @catch(id ex)
+    {
+        NSLog(@"Exception detail: %@", ex);
+    }
+}
+#pragma mark -
+
 #pragma -
 @end

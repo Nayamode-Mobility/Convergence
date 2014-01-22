@@ -34,6 +34,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshMeals) name:@"SyncUpCompleted" object:nil];
+    
     if (self.arrFAQs == nil) {
         self.arrFAQs = [[NSArray alloc] init];
     }
@@ -100,6 +102,17 @@
             [self.svwFAQs setContentOffset:CGPointMake(0, 0) animated:YES];
         }
     }
+}
+
+- (void)RefreshMeals
+{
+    if (self.arrFAQs == nil)
+    {
+        self.arrFAQs = [[NSArray alloc] init];
+    }
+    
+    MasterDB *objMasterDB = [MasterDB GetInstance];
+    self.arrFAQs = [objMasterDB GetMeals];
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {

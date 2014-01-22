@@ -32,6 +32,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshAgendas) name:@"SyncUpCompleted" object:nil];
+    
+    
     if (self.arrAgendas == nil)
     {
         self.arrAgendas = [[NSArray alloc] init];
@@ -237,6 +240,19 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (void)RefreshAgendas
+{
+    if (self.arrAgendas == nil)
+    {
+        self.arrAgendas = [[NSArray alloc] init];
+    }
+    AgendaDB *objAgendaDB = [AgendaDB GetInstance];
+    self.arrAgendas = [objAgendaDB GetAgendas];
+    
+    [self.agendaCollectionView reloadData];
+}
+
 
 - (NSString *)formatDate:(NSString *)strDate
 {

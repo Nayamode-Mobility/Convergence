@@ -15,7 +15,17 @@
 #import <UIKit/UIKit.h>
 #import "Reachability.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+#import "LiveSDK/LiveConnectClient.h"
+#import "LiveSDK/LiveConnectSession.h"
+#import "StyledPullableView.h"
+
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate, PullableViewDelegate>
+{
+    StyledPullableView *pullUpView;
+}
+
+@property (nonatomic, retain) LiveConnectClient *liveClient;
 
 @property (strong, nonatomic) UIWindow *window;
 
@@ -31,5 +41,9 @@
 
 @property (strong, nonatomic) NSMutableDictionary *dictShuttleData;
 
+
+- (void) addBottomPullOutMenu;
+- (void) hideBottomPullOutMenu;
+- (void) showBottomPullOutMenu;
 
 @end

@@ -9,12 +9,18 @@
 #import <UIKit/UIKit.h>
 #import <EventKit/EventKit.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import <Social/Social.h>
+#import <Accounts/Accounts.h>
+
 
 #import "Session.h"
+#import "SessionNoteViewController.h"
 
 @interface SessionDetailViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate>
 {
 }
+
+@property (nonatomic, retain) SessionNoteViewController *objSessionNoteViewController;
 
 @property (nonatomic, retain) Session *sessionData;
 @property (nonatomic) NSInteger intTag;
@@ -83,6 +89,8 @@
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *avLoadingFeeds;
 @property (strong, nonatomic) IBOutlet UILabel *lblNoFeeds;
 
+
+- (IBAction)btnSocialMediaClicked:(id)sender;
 - (IBAction)btnBackClicked:(id)sender;
 
 

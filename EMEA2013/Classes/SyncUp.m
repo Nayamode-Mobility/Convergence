@@ -40,6 +40,7 @@
 #import "Shuttle.h"
 #import "ShuttleTime.h"
 #import "ShuttleRouteMapLocation.h"
+#import "AppDelegate.h"
 
 @interface SyncUp ()
 {
@@ -101,6 +102,10 @@
     
     [Analytics AddAnalyticsForScreen:strSCREEN_SYNC_UP];
 
+    
+    //AppDelegate *objAppDelegate = (AppDelegate *)[[[UIApplication sharedApplication] delegate];
+    [APP hideBottomPullOutMenu];
+    
     [self SyncUp];
 }
 
@@ -162,8 +167,12 @@
 
 - (void)loadHome
 {
+    //AppDelegate *objAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [APP showBottomPullOutMenu];
+    
     if(self.blnCalledFromHome == YES)
     {
+         [[NSNotificationCenter defaultCenter] postNotificationName:@"SyncUpCompleted" object:self];
         [self.navigationController popViewControllerAnimated:YES];
     }
     else

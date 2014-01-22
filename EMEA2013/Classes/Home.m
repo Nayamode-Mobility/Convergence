@@ -18,6 +18,8 @@
 #import "Login.h"
 #import "SyncUp.h"
 #import "optin.h"
+#import "AppDelegate.h"
+#import "UIView+Custom.h"
 
 @interface Home ()
 
@@ -47,12 +49,33 @@
     
 	//Do any additional setup after loading the view.
     
-    [self addBottomPullOutMenu];
+  //  [self addBottomPullOutMenu];
     
     [Analytics AddAnalyticsForScreen:strSCREEN_HOME];
     
     //[UIView addTouchEffect:self.view];
-    [UIView addTouchEffectV1:self.view];
+    //[UIView addTouchEffectV1:self.view];
+    
+    if(self.intNavigateToTag > 0)
+    {
+        [self GoToLayerV1:self.intNavigateToTag];
+        self.intNavigateToTag = 0;
+    }
+    
+    [Analytics AddAnalyticsForScreen:strSCREEN_HOME];
+    
+    //[UIView addTouchEffect:self.view];
+    //[UIView addTouchEffectV1:self.view];
+    [UIView addTouchEffectV2:self.view];
+    
+    //[self addBottomPullOutMenu];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    AppDelegate *objAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [objAppDelegate showBottomPullOutMenu];
 }
 
 -(void) addBottomPullOutMenu
@@ -71,7 +94,7 @@
         {
             if([[DeviceManager GetDeviceSystemVersion] integerValue] < 7)
             {
-                pullUpView.openedCenter = CGPointMake(160 + xOffset,self.view.frame.size.height + 33);
+                pullUpView.openedCenter = CGPointMake(160 + xOffset,self.view.frame.size.height + 185);
                 pullUpView.closedCenter = CGPointMake(160 + xOffset, self.view.frame.size.height + 255);
             }
             else
@@ -82,11 +105,20 @@
         }
         else
         {
-            pullUpView.openedCenter = CGPointMake(160 + xOffset,self.view.frame.size.height + 141);
-            pullUpView.closedCenter = CGPointMake(160 + xOffset, self.view.frame.size.height + 211);
+            if([[DeviceManager GetDeviceSystemVersion] integerValue] < 7)
+            {
+                pullUpView.openedCenter = CGPointMake(160 + xOffset,self.view.frame.size.height + 141);
+                pullUpView.closedCenter = CGPointMake(160 + xOffset, self.view.frame.size.height + 211);
+            }
+            else
+            {
+                pullUpView.openedCenter = CGPointMake(160 + xOffset,self.view.frame.size.height + 155);
+                pullUpView.closedCenter = CGPointMake(160 + xOffset, self.view.frame.size.height + 225);
+            }
         }
     }
-    else{
+    else
+    {
         pullUpView.openedCenter = CGPointMake(160 + xOffset,self.view.frame.size.height + 160);
         pullUpView.closedCenter = CGPointMake(160 + xOffset, self.view.frame.size.height + 220);
     }
@@ -313,9 +345,23 @@
     UIButton *btnSender = (UIButton*)sender;
     NSLog(@"%d",btnSender.tag);
     
-    if(btnSender.tag > 0)
+   // if(btnSender.tag > 0)
+   // {
+     //   [svwMain setContentOffset:CGPointMake(btnSender.tag, svwMain.frame.origin.y) animated:YES];
+   // }
+    
+    [self GoToLayerV1:btnSender.tag];
+    
+}
+
+- (void)GoToLayerV1:(NSUInteger)intTag
+{
+    NSLog(@"%d",intTag);
+    
+    if(intTag > 0)
     {
-        [svwMain setContentOffset:CGPointMake(btnSender.tag, svwMain.frame.origin.y) animated:YES];
+        //[svwMain setContentOffset:CGPointMake(1920.0f, svwMain.frame.origin.y) animated:YES];
+        [svwMain setContentOffset:CGPointMake(intTag, svwMain.frame.origin.y) animated:YES];
     }
 }
 
@@ -336,6 +382,23 @@
     [[self navigationController] pushViewController:vc animated:YES];
 }
 */
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if([identifier isEqualToString:@"loadTwitter"] || [identifier isEqualToString:@"loadFacebook"] || [identifier isEqualToString:@"loadLinkedin"] || [identifier isEqualToString:@"loadPhotoGallery1"] || [identifier isEqualToString:@"loadPhotoGallery2"] || [identifier isEqualToString:@"loadPhotoGallery3"] || [identifier isEqualToString:@"loadPhotoDetail"] || [identifier isEqualToString:@"loadTerms"] || [identifier isEqualToString:@"loadEvaluations"])
+    {
+        Shared *objShared = [Shared GetInstance];
+        
+        if([objShared GetIsInternetAvailable] == NO)
+        {
+            [self showAlert:nil withMessage:strNoInternetError withButton:@"OK" withIcon:nil];
+            return NO;
+        }
+    }
+    
+    return  YES;
+}
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -425,7 +488,9 @@
 
 - (void)pullableView:(PullableView *)pView loadResources:(UITapGestureRecognizer *)gesture
 {
-    [svwMain setContentOffset:CGPointMake(1920.0f, svwMain.frame.origin.y) animated:YES];
+   // [svwMain setContentOffset:CGPointMake(1920.0f, svwMain.frame.origin.y) animated:YES];
+     [self GoToLayerV1:1920.0f];
+    
 }
 
 - (void)pullableView:(PullableView *)pView logout:(UITapGestureRecognizer *)gesture
@@ -456,6 +521,8 @@
     
     [[self navigationController] pushViewController:vcLogin animated:YES];
 }
+
+
 #pragma mark -
 
 @end

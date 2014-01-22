@@ -37,4 +37,8 @@
 
 -(IBAction)btnInAppScanner_Click:(id)sender;
 
+@property (nonatomic) NSUInteger intNavigateToTag;
+
+- (void)GoToLayerV1:(NSUInteger)intTag;
+
 @end

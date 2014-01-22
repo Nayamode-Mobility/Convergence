@@ -32,6 +32,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshLostandFound) name:@"SyncUpCompleted" object:nil];
+    
 	// Do any additional setup after loading the view.
     if (self.arrLostNFound == nil) {
         self.arrLostNFound = [[NSArray alloc] init];
@@ -127,6 +130,19 @@
 - (IBAction)OpenWebsite:(id)sender
 {
     [Functions OpenWebsite:self.lblWebsite.text];
+}
+
+- (void)RefreshLostandFound
+{
+    if (self.arrLostNFound == nil)
+    {
+        self.arrLostNFound = [[NSArray alloc] init];
+    }
+    
+    EventInfoDB *objEventInfoDB = [EventInfoDB GetInstance];
+    self.arrLostNFound = [objEventInfoDB GetLostNFound];
+    
+    [self populateData];
 }
 
 - (IBAction)btnBackClicked:(id)sender

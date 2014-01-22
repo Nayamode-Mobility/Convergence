@@ -34,6 +34,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshSpeakers) name:@"SyncUpCompleted" object:nil];
+    
     [[[self btnSearch] layer] setBorderWidth:2.0f];
     [[[self btnSearch] layer] setBorderColor:[UIColor whiteColor].CGColor];
     
@@ -191,14 +193,25 @@
     //[[self avLoading] startAnimating];
     
     //Do not remove the search for 4 spaces
+   // [[self txtSearch] setText:@"    "];
+    
+    //[self btnSearchClicked:[self btnSearch]];
+    
+   // [[self txtSearch] setText:@""];
+    
+    [self RefreshSpeakers];
+    
+    //[[self vwLoading] setHidden:YES];
+    //[[self avLoading] stopAnimating];
+}
+
+- (void)RefreshSpeakers
+{
     [[self txtSearch] setText:@"    "];
     
     [self btnSearchClicked:[self btnSearch]];
     
     [[self txtSearch] setText:@""];
-    
-    //[[self vwLoading] setHidden:YES];
-    //[[self avLoading] stopAnimating];
 }
 
 - (IBAction)btnSearchClicked:(id)sender
