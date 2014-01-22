@@ -13,7 +13,7 @@
 @synthesize strAttendeeID, strRegistrantID, strFirstName, strMiddle, strLastName, strAttendeeName, strCompany, strDesignation,
             strExhibitorName, strEmail, strPUID, strPhotoURL, strBIO, strPhone, strIsNotificationEnabled, strIsEmailVisible,
             strIsNameVisible, strIsDesignationVisible, strIsCompanyVisible, strAllowInAppMessaging, strAllowSendMeetingInvite,
-strIsBiovisible, strIsPhotoVisible, strIsPhoneNumberVisible, arrExhibitors,IsSynced,IsDeleted;
+strIsBiovisible, strIsPhotoVisible, strIsPhoneNumberVisible, arrExhibitors,strIsSynced,strIsDeleted;
 #pragma mark -
 
 - (id)init

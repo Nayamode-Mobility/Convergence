@@ -11,7 +11,15 @@
 @interface FavouriteAttendeeViewController : UIViewController
 {
     NSArray *arrFavAttendee;
+    
+    IBOutlet UICollectionView *collFavAttendees;
 }
+@property (nonatomic, retain) NSMutableData *objData;
+@property (nonatomic, retain) NSURLConnection  *objConnection;
+
+@property (strong, nonatomic) IBOutlet UIView *vwLoading;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *avLoading;
+
 
 -(IBAction)btnBack_Click:(id)sender;
 -(IBAction)btnSynchFavAttendee_click:(id)sender;

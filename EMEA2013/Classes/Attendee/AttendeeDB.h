@@ -26,6 +26,7 @@
 - (NSArray*)GetSearch:(NSString *)searchFor;
 - (BOOL)SetAttendees:(NSData*)objData;
 - (BOOL)SetAttendeeExhibitors:(NSData *)objData;
+- (BOOL)SetFavAttendees:(NSData *)objData;
 
 - (BOOL)AddExhibitor:(NSString*)strExhibitorID;
 - (BOOL)DeleteExhibitor:(NSString*)strExhibitorID;
@@ -34,5 +35,11 @@
 
 - (NSArray*)GetFavouriteAttendee;
 - (NSArray*)GetAttendeesList:(NSData *)objData;
+
+- (NSString*)GetFavAttendeesJSON;
+
+- (BOOL)AddFavAttendee:(Attendee*)objAttendee;
+- (BOOL)DeleteFavAttendee:(int)intAttendeeID;
+- (BOOL)UpdateFavAttendee:(Attendee*)objAttendee;
 
 @end

@@ -503,6 +503,91 @@ static AttendeeDB *objAttendeeDB = nil;
     
     return blnResult;
 }
+
+- (BOOL)SetFavAttendees:(NSData *)objData
+{
+    BOOL blnResult = NO;
+    
+    NSError *error;
+    
+    NSMutableDictionary *dictData = [[NSMutableDictionary alloc] init];
+    dictData = [NSJSONSerialization JSONObjectWithData:objData options:kNilOptions error:&error];
+    
+    if(error==nil)
+    {
+        //int intVersion = [[dictData valueForKey:strKEY_VERSION_NO] intValue];
+        
+        NSArray *arrAttendees = [dictData valueForKey:@"FavouriteAttendeeList"];
+        NSUInteger intEntriesM = [arrAttendees count];
+        
+        if(intEntriesM > 0)
+        {
+            [self DeleteFavAttendee:0];
+            
+            Attendee *objAttendee = [[Attendee alloc] init];
+            NSMutableDictionary *dictAttendee;
+            
+            for (NSUInteger i = 0; i < intEntriesM; i++)
+            {
+                dictAttendee = [[NSMutableDictionary alloc] init];
+                
+                //dictAttendee = [[arrAttendees objectAtIndex:i] valueForKey:@"AttendeeDetails"];
+                dictAttendee = [arrAttendees objectAtIndex:i];
+                
+                objAttendee.strAttendeeID = [dictAttendee valueForKey:@"AttendeeID"];
+                
+                if([Functions ReplaceNUllWithZero:objAttendee.strAttendeeID]!=0)
+                {
+                    objAttendee.strRegistrantID = [Functions ReplaceNUllWithZero:[dictAttendee valueForKey:@"RegistrantId"]];
+                    objAttendee.strFirstName = [Functions ReplaceNUllWithBlank:[dictAttendee valueForKey:@"FirstName"]];
+                    objAttendee.strMiddle = [Functions ReplaceNUllWithBlank:[dictAttendee valueForKey:@"Middle"]];
+                    objAttendee.strLastName = [Functions ReplaceNUllWithBlank:[dictAttendee valueForKey:@"LastName"]];
+                    objAttendee.strAttendeeName = [Functions ReplaceNUllWithBlank:[dictAttendee valueForKey:@"AttendeeName"]];
+                    objAttendee.strCompany = [Functions ReplaceNUllWithBlank:[dictAttendee valueForKey:@"Company"]];
+                    objAttendee.strDesignation = [Functions ReplaceNUllWithBlank:[dictAttendee valueForKey:@"Designation"]];
+                    objAttendee.strExhibitorName = [Functions ReplaceNUllWithBlank:[dictAttendee valueForKey:@"ExhibitorName"]];
+                    objAttendee.strEmail = [Functions ReplaceNUllWithBlank:[dictAttendee valueForKey:@"Email"]];
+                    objAttendee.strPUID = [Functions ReplaceNUllWithZero:[dictAttendee valueForKey:@"PUID"]];
+                    objAttendee.strPhotoURL = [Functions ReplaceNUllWithBlank:[dictAttendee valueForKey:@"PhotoURL"]];
+                    objAttendee.strBIO = [Functions ReplaceNUllWithBlank:[dictAttendee valueForKey:@"BIO"]];
+                    objAttendee.strPhone = [Functions ReplaceNUllWithBlank:[dictAttendee valueForKey:@"Phone"]];
+                    objAttendee.strIsNotificationEnabled = [Functions ReplaceNUllWithZero:[dictAttendee valueForKey:@"IsNotificationEnabled"]];
+                    objAttendee.strIsEmailVisible = [Functions ReplaceNUllWithZero:[dictAttendee valueForKey:@"IsEmailVisible"]];
+                    objAttendee.strIsPhoneNumberVisible = [Functions ReplaceNUllWithZero:[dictAttendee valueForKey:@"IsPhoneNumberVisible"]];
+                    objAttendee.strIsNameVisible = [Functions ReplaceNUllWithZero:[dictAttendee valueForKey:@"IsNameVisible"]];
+                    objAttendee.strIsDesignationVisible = [Functions ReplaceNUllWithZero:[dictAttendee valueForKey:@"IsDesignationVisible"]];
+                    objAttendee.strIsCompanyVisible = [Functions ReplaceNUllWithZero:[dictAttendee valueForKey:@"IsCompanyVisible"]];
+                    objAttendee.strAllowInAppMessaging = [Functions ReplaceNUllWithZero:[dictAttendee valueForKey:@"AllowInAppMessaging"]];
+                    objAttendee.strAllowSendMeetingInvite = [Functions ReplaceNUllWithZero:[dictAttendee valueForKey:@"AllowSendMeetingInvite"]];
+                    objAttendee.strIsBiovisible = [Functions ReplaceNUllWithZero:[dictAttendee valueForKey:@"IsBioVisible"]];
+                    objAttendee.strIsPhotoVisible = [Functions ReplaceNUllWithZero:[dictAttendee valueForKey:@"IsPhotoVisible"]];
+                    objAttendee.strIsSynced = @"0";
+                    
+//                    NSString *strSQL = @"Select AttendeeID From Attendees Where AttendeeID = ?";
+//                    
+//                    DB *objDB = [DB GetInstance];
+//                    if([objDB CheckIfRecordAvailableWithIntKeyWithQuery:[objAttendee.strAttendeeID intValue] Query:strSQL] == NO)
+//                    {
+                        blnResult = [self AddFavAttendee:objAttendee];
+//                    }
+//                    else
+//                    {
+//                        blnResult = [self UpdateAttendee:objAttendee];
+//                    }
+                }
+            }
+        }
+        
+
+    }
+    else
+    {
+        [ExceptionHandler AddExceptionForScreen:strSCREEN_ATTENDEE MethodName:[NSString stringWithFormat:@"%@",NSStringFromSelector(_cmd)] Exception:error.description];
+    }
+    
+    return blnResult;
+}
+
 #pragma mark -
 
 #pragma mark Instance Methods (Attendee Exhibitors)
@@ -669,6 +754,108 @@ static AttendeeDB *objAttendeeDB = nil;
     
     return blnResult;
 }
+
+- (BOOL)AddFavAttendee:(Attendee*)objAttendee
+{
+    BOOL blnResult = NO;
+    
+	sqlite3 *dbEMEAFY14;
+    
+	dbEMEAFY14 = [[DB GetInstance] OpenDatabase];
+    
+    sqlite3_stmt *compiledStmt;
+    
+    NSString *strSQL = @"Insert Into FavouriteAttendees(AttendeeID, RegistrantID, FirstName, Middle, LastName, AttendeeName, Company, Designation, ExhibitorName, Email, PUID, PhotoURL, BIO, Phone, IsNotificationEnabled, IsEmailvisible, IsPhoneNumberVisible, IsNameVisible, IsDesignationVisible, IsCompanyVisible, AllowInAppMessaging, AllowSendMeetingInvite, IsBiovisible, IsPhotoVisible,IsSynced) ";
+    strSQL = [strSQL stringByAppendingString:@"Values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"];
+    
+	if(sqlite3_prepare_v2(dbEMEAFY14, [strSQL UTF8String], -1, &compiledStmt, NULL) != SQLITE_OK)
+    {
+        NSLog(@"Error while creating insert statement. %s",sqlite3_errmsg(dbEMEAFY14));
+        [ExceptionHandler AddExceptionForScreen:strSCREEN_ATTENDEE MethodName:[NSString stringWithFormat:@"%@",NSStringFromSelector(_cmd)] Exception:[NSString stringWithFormat:@"Error while creating insert statement. %s",sqlite3_errmsg(dbEMEAFY14)]];
+	}
+	else
+    {
+        sqlite3_bind_int(compiledStmt, 1, [objAttendee.strAttendeeID intValue]);
+        sqlite3_bind_int(compiledStmt, 2, [objAttendee.strRegistrantID intValue]);
+        sqlite3_bind_text(compiledStmt, 3, [objAttendee.strFirstName UTF8String], -1, NULL);
+        sqlite3_bind_text(compiledStmt, 4, [objAttendee.strMiddle UTF8String], -1, NULL);
+        sqlite3_bind_text(compiledStmt, 5, [objAttendee.strLastName UTF8String], -1, NULL);
+        sqlite3_bind_text(compiledStmt, 6, [objAttendee.strAttendeeName UTF8String], -1, NULL);
+        sqlite3_bind_text(compiledStmt, 7, [objAttendee.strCompany UTF8String], -1, NULL);
+        sqlite3_bind_text(compiledStmt, 8, [objAttendee.strDesignation UTF8String], -1, NULL);
+        sqlite3_bind_text(compiledStmt, 9, [objAttendee.strExhibitorName UTF8String], -1, NULL);
+        sqlite3_bind_text(compiledStmt, 10, [objAttendee.strEmail UTF8String], -1, NULL);
+        sqlite3_bind_int(compiledStmt, 11, [objAttendee.strPUID intValue]);
+        sqlite3_bind_text(compiledStmt, 12, [objAttendee.strPhotoURL UTF8String], -1, NULL);
+        sqlite3_bind_text(compiledStmt, 13, [objAttendee.strBIO UTF8String], -1, NULL);
+        sqlite3_bind_text(compiledStmt, 14, [objAttendee.strPhone UTF8String], -1, NULL);
+        sqlite3_bind_int(compiledStmt, 15, [objAttendee.strIsNotificationEnabled boolValue]);
+        sqlite3_bind_int(compiledStmt, 16, [objAttendee.strIsEmailVisible boolValue]);
+        sqlite3_bind_int(compiledStmt, 17, [objAttendee.strIsPhoneNumberVisible boolValue]);
+        sqlite3_bind_int(compiledStmt, 18, [objAttendee.strIsNameVisible boolValue]);
+        sqlite3_bind_int(compiledStmt, 19, [objAttendee.strIsDesignationVisible boolValue]);
+        sqlite3_bind_int(compiledStmt, 20, [objAttendee.strIsCompanyVisible boolValue]);
+        sqlite3_bind_int(compiledStmt, 21, [objAttendee.strAllowInAppMessaging boolValue]);
+        sqlite3_bind_int(compiledStmt, 22, [objAttendee.strAllowSendMeetingInvite boolValue]);
+        sqlite3_bind_int(compiledStmt, 23, [objAttendee.strIsBiovisible boolValue]);
+        sqlite3_bind_int(compiledStmt, 24, [objAttendee.strIsPhotoVisible boolValue]);
+        sqlite3_bind_int(compiledStmt, 25, [objAttendee.strIsSynced boolValue]);
+        
+		if(SQLITE_DONE != sqlite3_step(compiledStmt))
+        {
+            NSLog(@"Error while creating insert statement. %s",sqlite3_errmsg(dbEMEAFY14));
+            [ExceptionHandler AddExceptionForScreen:strSCREEN_ATTENDEE MethodName:[NSString stringWithFormat:@"%@",NSStringFromSelector(_cmd)] Exception:[NSString stringWithFormat:@"Error while creating insert statement. %s",sqlite3_errmsg(dbEMEAFY14)]];
+            
+			blnResult = NO;
+		}
+		else
+        {
+			blnResult = YES;
+		}
+    }
+    
+    return blnResult;
+}
+
+- (BOOL)UpdateFavAttendee:(Attendee*)objAttendee
+{
+    BOOL blnResult = NO;
+    
+	sqlite3 *dbEMEAFY14;
+    
+	dbEMEAFY14 = [[DB GetInstance] OpenDatabase];
+    
+    sqlite3_stmt *compiledStmt;
+    
+    NSString *strSQL = @"Update FavouriteAttendee Set ";
+    strSQL = [strSQL stringByAppendingString:@"IsDeleted = 1 , IsSynced = 0"];
+    strSQL = [strSQL stringByAppendingFormat:@"Where AttendeeID = ? "];
+    
+	if(sqlite3_prepare_v2(dbEMEAFY14, [strSQL UTF8String], -1, &compiledStmt, NULL) != SQLITE_OK)
+    {
+        NSLog(@"Error while creating insert statement. %s",sqlite3_errmsg(dbEMEAFY14));
+        [ExceptionHandler AddExceptionForScreen:strSCREEN_ATTENDEE MethodName:[NSString stringWithFormat:@"%@",NSStringFromSelector(_cmd)] Exception:[NSString stringWithFormat:@"Error while creating insert statement. %s",sqlite3_errmsg(dbEMEAFY14)]];
+	}
+	else
+    {
+        sqlite3_bind_int(compiledStmt, 1, [objAttendee.strAttendeeID intValue]);
+        
+		if(SQLITE_DONE != sqlite3_step(compiledStmt))
+        {
+            NSLog(@"Error while creating insert statement. %s",sqlite3_errmsg(dbEMEAFY14));
+            [ExceptionHandler AddExceptionForScreen:strSCREEN_ATTENDEE MethodName:[NSString stringWithFormat:@"%@",NSStringFromSelector(_cmd)] Exception:[NSString stringWithFormat:@"Error while creating insert statement. %s",sqlite3_errmsg(dbEMEAFY14)]];
+            
+			blnResult = NO;
+		}
+		else
+        {
+			blnResult = YES;
+		}
+    }
+    
+    return blnResult;
+}
+
 
 - (BOOL)UpdateAttendee:(Attendee*)objAttendee
 {
@@ -917,6 +1104,50 @@ static AttendeeDB *objAttendeeDB = nil;
     
     return blnResult;
 }
+
+- (BOOL)DeleteFavAttendee:(int)intAttendeeID
+{
+    BOOL blnResult = NO;
+    
+        sqlite3 *dbEMEAFY14;
+        
+        dbEMEAFY14 = [[DB GetInstance] OpenDatabase];
+        
+        sqlite3_stmt *compiledStmt;
+        
+        NSString *strSQL = @"Delete From FavouriteAttendees ";
+        
+        if(intAttendeeID != 0)
+        {
+            strSQL = [strSQL stringByAppendingFormat:@"Where AttendeeID = ? "];
+        }
+        
+        if(sqlite3_prepare_v2(dbEMEAFY14, [strSQL UTF8String], -1, &compiledStmt, NULL) != SQLITE_OK)
+        {
+            NSLog(@"Error while creating delete statement. %s",sqlite3_errmsg(dbEMEAFY14));
+            [ExceptionHandler AddExceptionForScreen:strSCREEN_ATTENDEE MethodName:[NSString stringWithFormat:@"%@",NSStringFromSelector(_cmd)] Exception:[NSString stringWithFormat:@"Error while creating delete statement. %s",sqlite3_errmsg(dbEMEAFY14)]];
+        }
+        else
+        {
+            sqlite3_bind_int(compiledStmt, 1, intAttendeeID);
+            
+            if( SQLITE_DONE != sqlite3_step(compiledStmt) )
+            {
+                NSLog(@"Error while creating delete statement. %s",sqlite3_errmsg(dbEMEAFY14));
+                [ExceptionHandler AddExceptionForScreen:strSCREEN_ATTENDEE MethodName:[NSString stringWithFormat:@"%@",NSStringFromSelector(_cmd)] Exception:[NSString stringWithFormat:@"Error while creating delete statement. %s",sqlite3_errmsg(dbEMEAFY14)]];
+                
+                blnResult = NO;
+            }
+            else
+            {
+                blnResult = YES;
+            }
+        }
+
+    
+    return blnResult;
+}
+
 #pragma mark -
 
 #pragma mark Find Like Minded Filters
@@ -1051,6 +1282,49 @@ static AttendeeDB *objAttendeeDB = nil;
 	return arrAttendees;
 }
 
+
+- (NSString*)GetFavAttendeesJSON
+{
+    sqlite3 *dbEMEAFY14;
+    
+	NSMutableArray *arrFavAttendee = [[NSMutableArray alloc] init];
+    
+	dbEMEAFY14 = [[DB GetInstance] OpenDatabase];
+    
+    char *strSQL = "Select Email, IsDeleted From FavouriteAttendees where IsSynced = 0";
+    
+	sqlite3_stmt *compiledStmt;
+	int outval = sqlite3_prepare_v2(dbEMEAFY14, strSQL, -1, &compiledStmt, NULL);
+    
+	if (outval == SQLITE_OK)
+    {
+		//Loop through the results and add them to the feeds array
+		while (sqlite3_step(compiledStmt) == SQLITE_ROW)
+        {
+            NSMutableDictionary *dictFavAttendee = [[NSMutableDictionary alloc] init];
+            
+            [dictFavAttendee setObject:[Functions GetGUID] forKey:@"Id"];
+            [dictFavAttendee setObject:[NSString stringWithUTF8String: (char *)sqlite3_column_text(compiledStmt, 0)] forKey:@"FavouriteAttendeeEmail"];
+            [dictFavAttendee setObject:[NSNumber numberWithBool:[[NSString stringWithUTF8String: (char *)sqlite3_column_text(compiledStmt, 1)] boolValue]] forKey:@"IsDelete"];
+            
+			[arrFavAttendee addObject: dictFavAttendee];
+		}
+	}
+	else
+    {
+        NSLog(@"Error while selecting query: %s",sqlite3_errmsg(dbEMEAFY14));
+        [ExceptionHandler AddExceptionForScreen:strSCREEN_ATTENDEE_EXHIBITOR MethodName:[NSString stringWithFormat:@"%@",NSStringFromSelector(_cmd)] Exception:[NSString stringWithFormat:@"Error while selecting query: %s",sqlite3_errmsg(dbEMEAFY14)]];
+	}
+    
+	sqlite3_reset(compiledStmt);
+	//Release the compiled statement from memory
+	sqlite3_finalize(compiledStmt);
+    
+    NSString *strFavAttendee = [arrFavAttendee JSONRepresentation];
+    
+	return strFavAttendee;
+}
+
 - (NSArray*)GetFavouriteAttendee
 {
 	sqlite3 *dbEMEAFY14;
@@ -1061,7 +1335,7 @@ static AttendeeDB *objAttendeeDB = nil;
     
 	dbEMEAFY14 = [[DB GetInstance] OpenDatabase];
     
-    NSString *strSQL = @"Select AttendeeID, RegistrantID, FirstName, Middle, LastName, AttendeeName, Company, Designation, ExhibitorName, Email, PUID, PhotoURL, BIO, Phone, IsNotificationEnabled, IsEmailvisible, IsPhoneNumberVisible, IsNameVisible, IsDesignationVisible, IsCompanyVisible, AllowInAppMessaging, AllowSendMeetingInvite, IsBiovisible, IsPhotoVisible, Case When Length(FirstName)=0 Then substr(Upper(LastName), 1, 1) Else Substr(Upper(FirstName), 1, 1) End As Alpha From Attendees Where IsDeleted = 0";
+    NSString *strSQL = @"Select AttendeeID, RegistrantID, FirstName, Middle, LastName, AttendeeName, Company, Designation, ExhibitorName, Email, PUID, PhotoURL, BIO, Phone, IsNotificationEnabled, IsEmailvisible, IsPhoneNumberVisible, IsNameVisible, IsDesignationVisible, IsCompanyVisible, AllowInAppMessaging, AllowSendMeetingInvite, IsBiovisible, IsPhotoVisible, Case When Length(FirstName)=0 Then substr(Upper(LastName), 1, 1) Else Substr(Upper(FirstName), 1, 1) End As Alpha From FavouriteAttendees Where IsDeleted = 0";
     
     
     strSQL = [strSQL stringByAppendingString:@" Order By Upper(FirstName), Upper(LastName)"];

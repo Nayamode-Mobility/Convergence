@@ -11,12 +11,20 @@
 #import "CustomCollectionViewCell.h"
 #import "NSString+Custom.h"
 #import "AttendeeDetailViewController.h"
+#import "Shared.h"
+#import "User.h"
+#import "DB.h"
+#import "Constants.h"
+#import "DeviceManager.h"
+#import "NSURLConnection+Tag.h"
 
 @interface FavouriteAttendeeViewController ()
 
 @end
 
 @implementation FavouriteAttendeeViewController
+
+@synthesize objConnection, objData;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,7 +51,35 @@
 }
 -(IBAction)btnSynchFavAttendee_click:(id)sender
 {
+    [[self vwLoading] setHidden:NO];
+    [[self avLoading] startAnimating];
     
+    User *objUser = [User GetInstance];
+    DB *objDB = [DB GetInstance];
+    
+    AttendeeDB *objAttendeeDB = [AttendeeDB GetInstance];
+    NSString *strAttendeeExhibitors = [objAttendeeDB GetFavAttendeesJSON];
+    
+    NSString *strURL = strAPI_URL;
+    strURL = [strURL stringByAppendingString:strAPI_ATTENDEE_GET_ATTENDEE_FAV_LIST];
+    
+    NSURL *URL = [NSURL URLWithString:strURL];
+    
+    NSMutableURLRequest *objRequest = [[NSMutableURLRequest alloc] initWithURL:URL];
+    [objRequest setHTTPMethod:@"POST"];
+    [objRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    //[objRequest addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [objRequest addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    [objRequest addValue:strAPI_AUTH_TOKEN forHTTPHeaderField:@"Authorization-token"];
+    //[objRequest addValue:@"iPhone" forHTTPHeaderField:@"DeviceType"];
+    [objRequest addValue:[DeviceManager GetDeviceType] forHTTPHeaderField:@"DeviceType"];
+    [objRequest addValue:[objUser GetAccountEmail] forHTTPHeaderField:@"EmailId"];
+    [objRequest addValue:strAttendeeExhibitors forHTTPHeaderField:@"FavouriteAttendeeJSON"];
+    [objRequest addValue:[NSString stringWithFormat:@"%d",[objDB GetVersionForScreen:strSCREEN_ATTENDEE_EXHIBITOR]] forHTTPHeaderField:@"VersionNo"];
+    
+    objConnection = [[NSURLConnection alloc] initWithRequest:objRequest delegate:self startImmediately:YES tag:0];
+
 }
 
 
@@ -104,6 +140,53 @@
         AttendeeDetailViewController *controller = segue.destinationViewController;
         CustomCollectionViewCell *attendeeCell = (CustomCollectionViewCell *)sender;
         controller.attendeeData = (Attendee *)attendeeCell.cellData;
+    }
+}
+
+
+#pragma mark Connections Events
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    [[self vwLoading] setHidden:YES];
+    [[self avLoading] stopAnimating];
+
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    objData = [[NSMutableData alloc] init];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [objData appendData:data];
+    
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    NSInteger intTag = (int)[connection getTag];
+    
+    switch (intTag)
+    {
+        case 0:
+        {
+            
+            AttendeeDB *objAttendeeDB = [AttendeeDB GetInstance];
+            
+            if([objAttendeeDB SetFavAttendees:objData])
+            {
+                arrFavAttendee = [objAttendeeDB GetFavouriteAttendee];
+            }
+            
+            [collFavAttendees reloadData];
+
+            [[self vwLoading] setHidden:YES];
+            [[self avLoading] stopAnimating];
+        }
+            break;
+        default:
+            break;
     }
 }
 

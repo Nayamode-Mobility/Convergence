@@ -8500,7 +8500,7 @@
                                                             <rect key="frame" x="20" y="0.0" width="280" height="57"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                                <rect key="frame" x="0.0" y="0.0" width="280" height="57"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="280.00000000000006" height="57"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="07:00 - 09:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oqs-jo-0bh">
@@ -9525,7 +9525,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="P39-kQ-MGa">
-                                                <rect key="frame" x="0.0" y="122.00000000000006" width="320" height="444"/>
+                                                <rect key="frame" x="0.0" y="122" width="320" height="444.00000000000006"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eih-YR-G1n">
@@ -9536,7 +9536,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view hidden="YES" contentMode="scaleToFill" id="H0u-qo-WCL">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="444"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="444.00000000000006"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="address.png" id="0SS-au-SMw">
@@ -14124,7 +14124,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="dy8-yK-kkI">
-                                <rect key="frame" x="0.0" y="122" width="320" height="443.99999999999994"/>
+                                <rect key="frame" x="0.0" y="121.99999999999999" width="320" height="444"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="From:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0qW-Sg-SRF">
@@ -14760,7 +14760,7 @@
                                 </connections>
                             </button>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="4vW-tx-JXS">
-                                <rect key="frame" x="19" y="66" width="282" height="436"/>
+                                <rect key="frame" x="19" y="105" width="282" height="436"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fsG-fg-MG7">
@@ -14816,14 +14816,30 @@
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="05L-Dx-wAa" id="GKK-0D-wVP"/>
-                                    <outlet property="delegate" destination="05L-Dx-wAa" id="GwL-FI-13S"/>
+                                    <outlet property="dataSource" destination="mtQ-YH-Pzp" id="Dxa-zn-cEx"/>
+                                    <outlet property="delegate" destination="mtQ-YH-Pzp" id="8Fm-AB-cUy"/>
                                 </connections>
                             </collectionView>
+                            <view hidden="YES" contentMode="scaleToFill" id="sUu-We-tdn">
+                                <rect key="frame" x="0.0" y="100" width="320" height="468"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="gray" id="bF5-xa-jbB">
+                                        <rect key="frame" x="150" y="170" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.89019614459999996" green="0.89019614459999996" blue="0.89019614459999996" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="o2f-5P-RTu"/>
+                    <connections>
+                        <outlet property="avLoading" destination="bF5-xa-jbB" id="lpO-nQ-pK9"/>
+                        <outlet property="collFavAttendees" destination="4vW-tx-JXS" id="AhN-gL-vNC"/>
+                        <outlet property="vwLoading" destination="sUu-We-tdn" id="nHG-E3-4oX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="unw-sx-93w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
