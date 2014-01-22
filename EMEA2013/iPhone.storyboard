@@ -353,7 +353,7 @@
             <objects>
                 <viewController storyboardIdentifier="idLogin" id="KTc-vi-Sp1" customClass="Login" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Z9D-nm-bbb">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="567.99999999999989"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HubBG.png" id="DOl-eL-LML">
@@ -7630,7 +7630,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="dbv-OG-CuE">
-                                        <rect key="frame" x="0.0" y="8" width="320" height="459"/>
+                                        <rect key="frame" x="0.0" y="8" width="320" height="459.00000000000006"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="crq-be-vMO">
@@ -8499,7 +8499,7 @@
                                                             <rect key="frame" x="20" y="0.0" width="280" height="57"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                                <rect key="frame" x="0.0" y="0.0" width="280" height="57"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="280.00000000000006" height="57"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="07:00 - 09:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oqs-jo-0bh">
@@ -11131,7 +11131,7 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="No items found." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sWU-Lm-yXn">
-                                <rect key="frame" x="10" y="141" width="300" height="21"/>
+                                <rect key="frame" x="10" y="141" width="301" height="21"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                 <nil key="highlightedColor"/>
@@ -14738,8 +14738,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LMd-Te-YFh" userLabel="Back Button">
+                                <rect key="frame" x="20" y="25" width="45" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="back.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnBack_Click:" destination="mtQ-YH-Pzp" eventType="touchUpInside" id="7nD-Kt-6tI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="A9P-2u-aCe" userLabel="Sync Button">
+                                <rect key="frame" x="137" y="25" width="45" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="back.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnSynchFavAttendee_click:" destination="mtQ-YH-Pzp" eventType="touchUpInside" id="k6M-HI-6Ve"/>
+                                </connections>
+                            </button>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="4vW-tx-JXS">
-                                <rect key="frame" x="19" y="66" width="282" height="436"/>
+                                <rect key="frame" x="19" y="105" width="282" height="436"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fsG-fg-MG7">
@@ -14795,76 +14815,32 @@
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="05L-Dx-wAa" id="GKK-0D-wVP"/>
-                                    <outlet property="delegate" destination="05L-Dx-wAa" id="GwL-FI-13S"/>
+                                    <outlet property="dataSource" destination="mtQ-YH-Pzp" id="Dxa-zn-cEx"/>
+                                    <outlet property="delegate" destination="mtQ-YH-Pzp" id="8Fm-AB-cUy"/>
                                 </connections>
                             </collectionView>
+                            <view hidden="YES" contentMode="scaleToFill" id="sUu-We-tdn">
+                                <rect key="frame" x="0.0" y="100" width="320" height="468"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="gray" id="bF5-xa-jbB">
+                                        <rect key="frame" x="150" y="170" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.89019614459999996" green="0.89019614459999996" blue="0.89019614459999996" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="o2f-5P-RTu"/>
+                    <connections>
+                        <outlet property="avLoading" destination="bF5-xa-jbB" id="lpO-nQ-pK9"/>
+                        <outlet property="collFavAttendees" destination="4vW-tx-JXS" id="AhN-gL-vNC"/>
+                        <outlet property="vwLoading" destination="sUu-We-tdn" id="nHG-E3-4oX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="unw-sx-93w" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="23Z-sA-ysC">
-                    <rect key="frame" x="0.0" y="0.0" width="282" height="436"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nUK-LN-zh9">
-                        <size key="itemSize" width="250" height="100"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                    <cells>
-                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="ipg-TN-WQP" customClass="CustomCollectionViewCell">
-                            <rect key="frame" x="35" y="0.0" width="250" height="100"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                <rect key="frame" x="0.0" y="0.0" width="250" height="100"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <subviews>
-                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Title of Speaker" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="24h-Nf-9al">
-                                        <rect key="frame" x="93" y="36" width="142" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="normal.png" id="ncq-fN-NhY">
-                                        <rect key="frame" x="15" y="15" width="70" height="70"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="First Last name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jR3-jN-FVY">
-                                        <rect key="frame" x="93" y="15" width="142" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <color key="textColor" red="0.40784313729999999" green="0.12941176469999999" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="highlightedColor" red="0.40784313729999999" green="0.12941176469999999" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Company" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0Bk-3Z-x4S">
-                                        <rect key="frame" x="93" y="36" width="142" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <connections>
-                                <outlet property="imgLogo" destination="ncq-fN-NhY" id="HYG-Ek-Bud"/>
-                                <outlet property="lblCompany" destination="0Bk-3Z-x4S" id="F8X-qM-r4r"/>
-                                <outlet property="lblName" destination="jR3-jN-FVY" id="JQa-60-hKZ"/>
-                                <outlet property="lblTitle" destination="24h-Nf-9al" id="Ufr-jS-CrU"/>
-                            </connections>
-                        </collectionViewCell>
-                    </cells>
-                    <connections>
-                        <outlet property="dataSource" destination="mtQ-YH-Pzp" id="xJ8-Ot-SAN"/>
-                        <outlet property="delegate" destination="mtQ-YH-Pzp" id="ZcZ-V5-J5N"/>
-                    </connections>
-                </collectionView>
             </objects>
             <point key="canvasLocation" x="-120" y="1542"/>
         </scene>
@@ -15318,15 +15294,15 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="tVZ-aL-mV4"/>
-        <segue reference="0yb-4R-0Kf"/>
+        <segue reference="Ych-Ec-uY7"/>
         <segue reference="r4N-hk-VdN"/>
         <segue reference="xAC-oi-OtW"/>
-        <segue reference="Ych-Ec-uY7"/>
-        <segue reference="KZw-8t-nha"/>
-        <segue reference="X3n-Td-60R"/>
-        <segue reference="8nF-o0-ZKZ"/>
-        <segue reference="wHR-hH-bHd"/>
+        <segue reference="0yb-4R-0Kf"/>
+        <segue reference="PJ0-Fw-ygw"/>
         <segue reference="0b9-nf-ozc"/>
+        <segue reference="X3n-Td-60R"/>
+        <segue reference="wHR-hH-bHd"/>
+        <segue reference="8nF-o0-ZKZ"/>
+        <segue reference="KZw-8t-nha"/>
     </inferredMetricsTieBreakers>
 </document>

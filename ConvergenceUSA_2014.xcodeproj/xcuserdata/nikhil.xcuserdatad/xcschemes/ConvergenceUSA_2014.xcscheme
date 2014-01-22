@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C8F578F0185ED7EC00720CD9"
-               BuildableName = "ConvergenceUSA_2014.app"
+               BuildableName = "Convergence.app"
                BlueprintName = "ConvergenceUSA_2014"
                ReferencedContainer = "container:ConvergenceUSA_2014.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C8F578F0185ED7EC00720CD9"
-            BuildableName = "ConvergenceUSA_2014.app"
+            BuildableName = "Convergence.app"
             BlueprintName = "ConvergenceUSA_2014"
             ReferencedContainer = "container:ConvergenceUSA_2014.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C8F578F0185ED7EC00720CD9"
-            BuildableName = "ConvergenceUSA_2014.app"
+            BuildableName = "Convergence.app"
             BlueprintName = "ConvergenceUSA_2014"
             ReferencedContainer = "container:ConvergenceUSA_2014.xcodeproj">
          </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C8F578F0185ED7EC00720CD9"
-            BuildableName = "ConvergenceUSA_2014.app"
+            BuildableName = "Convergence.app"
             BlueprintName = "ConvergenceUSA_2014"
             ReferencedContainer = "container:ConvergenceUSA_2014.xcodeproj">
          </BuildableReference>

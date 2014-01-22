@@ -64,8 +64,8 @@
 @property (nonatomic, retain) NSString *strIsBiovisible;
 @property (nonatomic, retain) NSString *strIsPhotoVisible;
 
-@property (nonatomic, readwrite) BOOL IsSynced;
-@property (nonatomic, readwrite) BOOL IsDeleted;
+@property (nonatomic, retain) NSString *strIsSynced;
+@property (nonatomic, retain) NSString *strIsDeleted;
 
 @property (nonatomic, retain) NSArray *arrExhibitors;
 @end

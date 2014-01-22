@@ -78,6 +78,8 @@ NSString *const strAPI_ATTENDEE_ADD_MESSAGE = @"api/Attendee/AddMessage";
 NSString *const strAPI_ATTENDEE_DELETE_INBOX_MESSAGE = @"api/Attendee/DeleteInboxMessage";
 NSString *const strAPI_ATTENDEE_DELETE_SENTBOX_MESSAGE = @"api/Attendee/DeleteSentboxMessage";
 NSString *const strAPI_ATTENDEE_AskToSpeakers = @"api/Attendee/AskToSpeakers";
+NSString *const strAPI_ATTENDEE_GET_ATTENDEE_FAV_LIST = @"api/Attendee/GetFavouriteAttendeesList";
+
 
 NSString *const strAPI_SESSION_GET_SESSION_LIST = @"api/Session/GetSessionList";
 NSString *const strAPI_SESSION_GET_SPEAKER_LIST = @"api/Session/GetSpeakerList";
